@@ -21,12 +21,13 @@
 
 .Checkout-placeOrder {
   margin: 20px;
-  background-color: whitesmoke;
+  background-color: white;
   margin-top: 20px;
   max-width: fit-content !important;
   border: 1px solid black;
   border-radius: 5px;
   padding: 20px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .FoodItems-checkout {
@@ -37,7 +38,16 @@
 }
 
 .YourOrder {
-  margin: 20px;
-  margin-top: 0px;
   font-size: xx-large;
+  margin-left: 20px;
+}
+
+.YourOrder-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.YourOrder-wrap > * {
+  margin-right: 10px;
 }

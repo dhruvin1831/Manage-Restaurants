@@ -39,6 +39,12 @@ const reducer = (state, action) => {
         order: neworder,
       };
 
+    case "CLEAR_ORDER":
+      return {
+        ...state,
+        order: [],
+      };
+
     default:
       return state;
   }

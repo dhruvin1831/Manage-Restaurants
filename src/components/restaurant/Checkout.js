@@ -7,6 +7,8 @@ import FoodItemCheckout from "../Item/FoodItemCheckout";
 import Button from "react-bootstrap/Button";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { useStateValue } from "../../StateProvider";
+import { Link } from "react-router-dom";
+
 function Checkout() {
   // eslint-disable-next-line no-unused-vars
   const [{ order }, dispatch] = useStateValue();
@@ -27,6 +29,12 @@ function Checkout() {
     return sum;
   };
 
+  const clearOrder = () => {
+    dispatch({
+      type: "CLEAR_ORDER",
+    });
+  };
+
   return (
     <>
       <Header />
@@ -42,7 +50,15 @@ function Checkout() {
           </p>
         </Jumbotron>
         <br />
-        <div className="YourOrder">Your Order</div>
+        <div className="YourOrder-wrap">
+          <span className="YourOrder">Your Order</span>
+          <Link to="/">
+            <Button variant="warning">Order More</Button>
+          </Link>
+          <Button onClick={clearOrder} variant="danger">
+            Remove All Items
+          </Button>
+        </div>
         <hr />
         <div className="FoodItems-checkout">
           {currentOrder.map(({ image, price, name, count, id }) => (

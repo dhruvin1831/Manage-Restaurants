@@ -5,12 +5,16 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import "../../styles/Header.css";
 import { Link } from "react-router-dom";
+import RestaurantIcon from "@material-ui/icons/Restaurant";
 function Header() {
   return (
     <div className="Header-wrap">
       <Navbar bg="dark" variant="dark" expand="md" className="Header-nav">
         <Container fluid>
-          <Navbar.Brand href="/">Restaurant XYZ</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <RestaurantIcon />
+            {"  "}Restaurant XYZ
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
