@@ -1,0 +1,94 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import "../../styles/FoodItem.css";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import { useStateValue } from "../../StateProvider";
+
+function FoodItem({ id, image, name, price }) {
+  // eslint-disable-next-line no-unused-vars
+  const [{ order }, dispatch] = useStateValue();
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let index = order.findIndex((orderItem) => orderItem.id === id);
+    if (index === -1) setCount(0);
+    else setCount(order[index].count);
+  }, [order]);
+
+  const addItem = () => {
+    const index = order.findIndex((orderItem) => orderItem.id === id);
+    var newItem;
+    if (index >= 0) {
+      newItem = {
+        id,
+        image,
+        price,
+        name,
+        count: order[index].count + 1,
+      };
+    } else {
+      newItem = {
+        id,
+        image,
+        price,
+        name,
+        count: 1,
+      };
+    }
+    dispatch({
+      type: "ADD_TO_ORDER",
+      item: newItem,
+    });
+  };
+
+  const removeItem = () => {
+    const index = order.findIndex((orderItem) => orderItem.id === id);
+    var removeItem;
+    if (index >= 0) {
+      removeItem = {
+        id,
+        image,
+        price,
+        name,
+        count: order[index].count - 1,
+      };
+    } else {
+      console.warn("Removing item which is not ordered");
+      return;
+    }
+    dispatch({
+      type: "REMOVE_FROM_ORDER",
+      item: removeItem,
+    });
+  };
+
+  return (
+    <>
+      <Card className="FoodItem">
+        <Card.Img variant="top" src={image} />
+        <Card.Body>
+          <Card.Title>
+            <div className="Foodinfo">
+              <span>{name}</span>
+              <span className="Food-price">&#8377; {price}</span>
+            </div>
+          </Card.Title>
+          <hr />
+          <Button onClick={addItem} variant="success" className="Add-remove">
+            <AddIcon />
+          </Button>{" "}
+          {count}{" "}
+          <Button onClick={removeItem} variant="danger" className="Add-remove">
+            <RemoveIcon />
+          </Button>
+        </Card.Body>
+      </Card>
+    </>
+  );
+}
+
+export default FoodItem;

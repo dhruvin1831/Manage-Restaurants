@@ -1,0 +1,43 @@
+.Checkout-container {
+  background-color: whitesmoke;
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+  margin-top: 20px;
+  min-height: 80vh;
+}
+
+.Checkout-items {
+  margin-top: 20px;
+  max-width: fit-content;
+}
+
+.Checkout-items :hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.Checkout-placeOrder {
+  margin: 20px;
+  background-color: whitesmoke;
+  margin-top: 20px;
+  max-width: fit-content !important;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.FoodItems-checkout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}
+
+.YourOrder {
+  margin: 20px;
+  margin-top: 0px;
+  font-size: xx-large;
+}

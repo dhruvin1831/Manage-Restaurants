@@ -1,0 +1,33 @@
+.Restaurant-body {
+  background-color: whitesmoke !important;
+  font-family: "Ubuntu", sans-serif;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  /* margin-bottom: 20px;
+  margin-top: 20px; */
+}
+
+.Food-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-around;
+  justify-items: center;
+}
+
+.Place-order {
+  position: fixed;
+  bottom: 7vh;
+  right: 5vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.267),
+    0 6px 20px 0 rgba(0, 0, 0, 0.267) !important;
+  border: 1px solid whitesmoke;
+  outline: none;
+  border-radius: 300px !important;
+}
+
+.Place-order :active {
+  outline-width: 3px;
+  outline-color: black;
+}

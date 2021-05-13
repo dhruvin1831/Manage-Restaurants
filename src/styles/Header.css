@@ -1,0 +1,10 @@
+.Header-wrap {
+  /* border-bottom: 1px solid black; */
+  position: sticky !important;
+  top: 0;
+  z-index: 100;
+}
+
+.Header-nav {
+  font-family: "Ubuntu", sans-serif;
+}
