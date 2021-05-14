@@ -8,34 +8,40 @@ import { Link } from "react-router-dom";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
 function Header() {
   return (
-    <div className="Header-wrap">
-      <Navbar bg="dark" variant="dark" expand="md" className="Header-nav">
-        <Container fluid>
-          <Navbar.Brand href="/">
-            <RestaurantIcon />
-            {"  "}Restaurant XYZ
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Link to="/">
-                <Nav.Link href="/">Menu</Nav.Link>
-              </Link>
-              <Link to="/checkout">
-                <Nav.Link href="/checkout">Your-Order</Nav.Link>
-              </Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Item>Another action</NavDropdown.Item>
-                <NavDropdown.Item>Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item>Separated link</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    // <div className="Header-wrap">
+    <Navbar
+      bg="dark"
+      fixed="top"
+      variant="dark"
+      expand="md"
+      className="Header-nav"
+    >
+      <Container fluid>
+        <Navbar.Brand href="/">
+          <RestaurantIcon />
+          {"  "}Restaurant XYZ
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Link to="/">
+              <Nav.Link href="/">Menu</Nav.Link>
+            </Link>
+            <Link to="/checkout">
+              <Nav.Link href="/checkout">Your-Order</Nav.Link>
+            </Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item>Action</NavDropdown.Item>
+              <NavDropdown.Item>Another action</NavDropdown.Item>
+              <NavDropdown.Item>Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item>Separated link</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+    // </div>
   );
 }
 

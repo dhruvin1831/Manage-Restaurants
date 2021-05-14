@@ -41,10 +41,7 @@ function Checkout() {
       <Container className="Checkout-container">
         <Jumbotron className="Checkout-placeOrder">
           <h1>Total Amount : &#8377; {calculateTotalAmount()}</h1>
-          <p>
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
-          </p>
+          <p>Manage your Order below or Place your order to confirm.</p>
           <p>
             <Button variant="success">Place Order</Button>
           </p>
@@ -52,25 +49,29 @@ function Checkout() {
         <br />
         <div className="YourOrder-wrap">
           <span className="YourOrder">Your Order</span>
-          <Link to="/">
-            <Button variant="warning">Order More</Button>
-          </Link>
-          <Button onClick={clearOrder} variant="danger">
-            Remove All Items
-          </Button>
+          <div className="Checkout-buttons">
+            <Link to="/">
+              <Button variant="warning">Order More</Button>
+            </Link>
+            <Button onClick={clearOrder} variant="danger">
+              Remove All Items
+            </Button>
+          </div>
         </div>
         <hr />
         <div className="FoodItems-checkout">
-          {currentOrder.map(({ image, price, name, count, id }) => (
-            <FoodItemCheckout
-              key={id}
-              id={id}
-              image={image}
-              price={price}
-              name={name}
-              quantity={count}
-            />
-          ))}
+          {currentOrder.length === 0
+            ? "Your have not ordered anything !"
+            : currentOrder.map(({ image, price, name, count, id }) => (
+                <FoodItemCheckout
+                  key={id}
+                  id={id}
+                  image={image}
+                  price={price}
+                  name={name}
+                  quantity={count}
+                />
+              ))}
         </div>
       </Container>
     </>

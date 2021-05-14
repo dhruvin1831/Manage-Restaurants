@@ -4,7 +4,7 @@ import "../../styles/Footer.css";
 function Footer() {
   return (
     <>
-      <Container>
+      <Container fluid className="Footer">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non facilis
         rem provident magni iste adipisci reprehenderit odio placeat aliquam,
         assumenda eum nam, qui, laudantium consectetur eius accusantium

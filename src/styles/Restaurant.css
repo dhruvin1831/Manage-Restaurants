@@ -8,12 +8,17 @@
   margin-top: 20px; */
 }
 
+.Restaurant-wrapper {
+  margin-top: 56px;
+}
+
 .Food-items-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-around;
   justify-items: center;
+  padding-bottom: 20px;
 }
 
 .Place-order {
