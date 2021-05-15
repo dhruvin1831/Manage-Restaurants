@@ -24,7 +24,7 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/">
+            <Link to="/restaurant">
               <Nav.Link href="/">Menu</Nav.Link>
             </Link>
             <Link to="/checkout">
