@@ -1,0 +1,30 @@
+.LandingPage-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: space-around;
+  font-family: "Ubuntu", sans-serif;
+  background-color: whitesmoke;
+}
+
+.Select-container {
+  user-select: none;
+  text-align: center;
+  /* margin-bottom: 20px; */
+  border: 1px solid black;
+  padding: 20px;
+  min-width: 300px;
+  font-size: xx-large;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.267),
+    0 6px 20px 0 rgba(0, 0, 0, 0.267) !important;
+  cursor: pointer;
+}
+
+.wrapper {
+  margin-bottom: 50px;
+}
