@@ -24,10 +24,10 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/restaurant">
+            <Link style={{ textDecoration: "none" }} to="/restaurant">
               <Nav.Link href="/">Menu</Nav.Link>
             </Link>
-            <Link to="/checkout">
+            <Link style={{ textDecoration: "none" }} to="/checkout">
               <Nav.Link href="/checkout">Your-Order</Nav.Link>
             </Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">

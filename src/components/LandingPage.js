@@ -11,14 +11,16 @@ function LandingPage() {
         <div className="wrapper">
           <Link to="/restaurant_selection" style={{ textDecoration: "none" }}>
             <span className="Select-container">
-              <PersonIcon style={{ fontSize: "40" }} /> Customer
+              <PersonIcon className="Icon" style={{ fontSize: "40" }} />{" "}
+              Customer
             </span>
           </Link>
         </div>
         <div className="wrapper">
           <Link to="/restaurant_login" style={{ textDecoration: "none" }}>
             <span className="Select-container">
-              <RestaurantIcon style={{ fontSize: "40" }} /> Restaurant
+              <RestaurantIcon className="Icon" style={{ fontSize: "40" }} />{" "}
+              Restaurant
             </span>
           </Link>
         </div>

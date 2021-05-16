@@ -1,15 +1,12 @@
-.LandingPage-body {
-  min-height: 100vh;
+.Login-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  align-content: space-around;
+  height: 100vh;
   font-family: "Ubuntu", sans-serif;
-  background-color: whitesmoke;
 }
 
-.Select-container {
+.Form-container {
   user-select: none;
   text-align: center;
   /* margin-bottom: 20px; */
@@ -25,16 +22,17 @@
   cursor: pointer;
 }
 
-.wrapper {
-  margin-bottom: 50px;
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.wrapper :hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 81, 255, 0.267),
-    0 6px 20px 0 rgba(0, 81, 255, 0.267);
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-.Icon {
-  box-shadow: none !important;
+.Form-input {
+  font-size: large;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  padding: 5px;
 }
