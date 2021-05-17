@@ -2,16 +2,32 @@ import { Container } from "@material-ui/core";
 import React, { useState } from "react";
 import "../../styles/Login.css";
 import Button from "react-bootstrap/Button";
+import { auth } from "../../firebase";
+import { useHistory } from "react-router-dom";
 function Login() {
-  const [user, setUser] = useState("");
+  const history = useHistory();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+        if (auth) history.push("/dashboard");
+      })
+      .catch((err) => alert(err.message));
   };
 
   const register = (e) => {
     e.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        console.log(auth);
+        if (auth) history.push("/create_restaurant");
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -22,12 +38,12 @@ function Login() {
             <h1>Sign In</h1>
             <hr />
             <form className="Form">
-              <h5>Username</h5>
+              <h5>Email</h5>
               <input
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="Form-input"
-                type="text"
+                type="email"
               />
               <h5>Password</h5>
               <input

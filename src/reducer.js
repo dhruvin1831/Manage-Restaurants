@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 export const initialState = {
   order: [],
+  user: null,
 };
 
 const reducer = (state, action) => {
@@ -45,6 +46,11 @@ const reducer = (state, action) => {
         order: [],
       };
 
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
     default:
       return state;
   }
