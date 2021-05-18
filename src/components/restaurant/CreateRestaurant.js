@@ -23,6 +23,10 @@ function CreateRestaurant() {
     history.push("/dashboard");
   };
 
+  useEffect(() => {
+    if (!user) history.push("/restaurant_login");
+  });
+
   return (
     <div>
       <Container fluid>
