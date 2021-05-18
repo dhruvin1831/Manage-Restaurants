@@ -1,14 +1,59 @@
-import React from 'react'
-
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import { useStateValue } from "../../StateProvider";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import "../../styles/CreateRestaurant.css";
+import { db } from "../../firebase";
+import { useHistory } from "react-router-dom";
 function CreateRestaurant() {
-    return (
-        <div>
-           this is page for create of new Restaurant
-           1. name
-           2. username of your restaurant
-           3. location 
+  const [{ user }, dispatch] = useStateValue();
+  const [restro, setRestro] = useState("");
+  const history = useHistory();
+
+  const proceed = (e) => {
+    e.preventDefault();
+    db.collection("users").doc(user.uid).set({
+      user: user.uid,
+      name: restro,
+      location: "",
+      email: user.email,
+    });
+
+    history.push("/dashboard");
+  };
+
+  return (
+    <div>
+      <Container fluid>
+        <div className="restro-container">
+          <span className="Form-container">
+            <h1>Provide Restaurant Details</h1>
+            {user ? <h5 className="email">Email : {user?.email}</h5> : ""}
+            <hr />
+            <form className="Form">
+              <h5>Restaurant Name</h5>
+              <input
+                value={restro}
+                onChange={(e) => setRestro(e.target.value)}
+                className="Form-input"
+                type="text"
+              />
+              <Button type="submit" variant="danger">
+                Mark Location
+              </Button>
+              <hr />
+              <div className="Button-wrap">
+                <Button onClick={proceed} type="submit" variant="success">
+                  Proceed
+                </Button>
+              </div>
+            </form>
+          </span>
         </div>
-    )
+      </Container>
+    </div>
+  );
 }
 
-export default CreateRestaurant
+export default CreateRestaurant;

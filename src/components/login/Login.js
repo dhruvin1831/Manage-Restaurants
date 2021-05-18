@@ -1,4 +1,4 @@
-import { Container } from "@material-ui/core";
+import Container from "react-bootstrap/Container";
 import React, { useState } from "react";
 import "../../styles/Login.css";
 import Button from "react-bootstrap/Button";
@@ -32,7 +32,7 @@ function Login() {
 
   return (
     <div>
-      <Container fluid>
+      <Container fluid className="Login-wrapper">
         <div className="Login-container">
           <span className="Form-container">
             <h1>Sign In</h1>
