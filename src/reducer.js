@@ -2,6 +2,7 @@
 export const initialState = {
   order: [],
   user: null,
+  page: "Select",
 };
 
 const reducer = (state, action) => {
@@ -53,6 +54,12 @@ const reducer = (state, action) => {
       };
     default:
       return state;
+
+    case "SET_PAGE":
+      return {
+        ...state,
+        page: action.page,
+      };
   }
 };
 

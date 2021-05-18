@@ -10,6 +10,9 @@ import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import CreateRestaurant from "./components/restaurant/CreateRestaurant";
 import Dashboard from "./components/restaurant/Dashboard";
+// import Orders from "./components/restaurant/Orders";
+// import RestroAccount from "./components/restaurant/RestroAccount";
+// import Menu from "./components/restaurant/Menu";
 function App() {
   const [state, dispatch] = useStateValue();
   useEffect(() => {
@@ -48,6 +51,15 @@ function App() {
           <Route path="/create_restaurant">
             <CreateRestaurant />
           </Route>
+          {/* <Route path="/order">
+            <Orders />
+          </Route>
+          <Route path="/menu">
+            <Menu />
+          </Route>
+          <Route path="/restro-account">
+            <RestroAccount />
+          </Route> */}
           <Route path="/dashboard">
             <Dashboard />
           </Route>
