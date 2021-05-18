@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars */
 import Container from "react-bootstrap/Container";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/Login.css";
 import Button from "react-bootstrap/Button";
 import { auth } from "../../firebase";
 import { useHistory } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
 function Login() {
+  const [{ user }, dispatch] = useStateValue();
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +21,10 @@ function Login() {
       })
       .catch((err) => alert(err.message));
   };
+
+  useEffect(() => {
+    if (user) history.push("/dashboard");
+  });
 
   const register = (e) => {
     e.preventDefault();

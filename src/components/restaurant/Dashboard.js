@@ -7,11 +7,17 @@ import Select from "./Select";
 import RestroAccount from "./RestroAccount";
 import Orders from "./Orders";
 import Menu from "./Menu";
+import { useHistory } from "react-router-dom";
 
 function Dashboard() {
+  const history = useHistory();
   const [{ user, page }, dispatch] = useStateValue();
   const [email, setEmail] = useState();
   const [name, setName] = useState();
+
+  useEffect(() => {
+    if (!user) history.push("/restaurant_login");
+  });
 
   useEffect(() => {
     var docRef = db.collection("users").doc(user?.uid);
@@ -47,7 +53,7 @@ function Dashboard() {
       ) : (
         ""
       )}
-    </div >
+    </div>
   );
 }
 

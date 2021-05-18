@@ -8,10 +8,14 @@ import { Link, useHistory } from "react-router-dom";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
 import Button from "react-bootstrap/Button";
 import { useStateValue } from "../../StateProvider";
+import { auth } from "../../firebase";
 function DashboardHeader({ name, email }) {
   const history = useHistory();
   const [{ page }, dispatch] = useStateValue();
-  const signOut = () => {};
+  const signOut = () => {
+    auth.signOut();
+    history.push("/restaurant_login");
+  };
   return (
     <Navbar
       bg="dark"
@@ -22,8 +26,8 @@ function DashboardHeader({ name, email }) {
     >
       <Container fluid>
         <Navbar.Brand
+          style={{ cursor: "pointer" }}
           onClick={() => dispatch({ type: "SET_PAGE", page: "Select" })}
-          href="/dashboard"
         >
           <RestaurantIcon />
           {"  "}
@@ -36,13 +40,13 @@ function DashboardHeader({ name, email }) {
               onClick={() => dispatch({ type: "SET_PAGE", page: "Menu" })}
               style={{ textDecoration: "none" }}
             >
-              <Nav.Link href="/menu">Manage-Menu</Nav.Link>
+              <Nav.Link>Manage-Menu</Nav.Link>
             </Link>
             <Link
               onClick={() => dispatch({ type: "SET_PAGE", page: "Orders" })}
               style={{ textDecoration: "none" }}
             >
-              <Nav.Link href="/order">Manage-Orders</Nav.Link>
+              <Nav.Link>Manage-Orders</Nav.Link>
             </Link>
           </Nav>
           <Nav>
