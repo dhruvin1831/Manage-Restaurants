@@ -20,7 +20,7 @@ function Dashboard() {
   });
 
   useEffect(() => {
-    var docRef = db.collection("users").doc(user?.uid);
+    var docRef = db.collection("restaurants").doc(user?.uid);
 
     docRef
       .get()
@@ -40,12 +40,12 @@ function Dashboard() {
   }, [user]);
   return (
     <div>
-      <DashboardHeader email={email} name={name} />
+      <DashboardHeader name={name} />
       <div style={{ marginTop: "56px" }}></div>
       {page === "Select" ? (
         <Select />
       ) : page === "RestroAccount" ? (
-        <RestroAccount />
+        <RestroAccount email={email} />
       ) : page === "Orders" ? (
         <Orders />
       ) : page === "Menu" ? (

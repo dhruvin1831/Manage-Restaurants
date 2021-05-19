@@ -22,10 +22,6 @@ function Login() {
       .catch((err) => alert(err.message));
   };
 
-  useEffect(() => {
-    if (user) history.push("/dashboard");
-  });
-
   const register = (e) => {
     e.preventDefault();
     auth

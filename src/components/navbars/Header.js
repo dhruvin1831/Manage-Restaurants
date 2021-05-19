@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import "../../styles/Header.css";
 import { Link } from "react-router-dom";
@@ -17,7 +16,7 @@ function Header() {
       className="Header-nav"
     >
       <Container fluid>
-        <Navbar.Brand href="/">
+        <Navbar.Brand href="/restaurant">
           <RestaurantIcon />
           {"  "}Restaurant XYZ
         </Navbar.Brand>
@@ -30,13 +29,6 @@ function Header() {
             <Link style={{ textDecoration: "none" }} to="/checkout">
               <Nav.Link href="/checkout">Your-Order</Nav.Link>
             </Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item>Action</NavDropdown.Item>
-              <NavDropdown.Item>Another action</NavDropdown.Item>
-              <NavDropdown.Item>Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item>Separated link</NavDropdown.Item>
-            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

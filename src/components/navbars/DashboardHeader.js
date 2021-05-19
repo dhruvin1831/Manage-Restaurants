@@ -9,12 +9,12 @@ import RestaurantIcon from "@material-ui/icons/Restaurant";
 import Button from "react-bootstrap/Button";
 import { useStateValue } from "../../StateProvider";
 import { auth } from "../../firebase";
-function DashboardHeader({ name, email }) {
+function DashboardHeader({ name }) {
   const history = useHistory();
   const [{ page }, dispatch] = useStateValue();
   const signOut = () => {
     auth.signOut();
-    history.push("/restaurant_login");
+    history.push("/");
   };
   return (
     <Navbar

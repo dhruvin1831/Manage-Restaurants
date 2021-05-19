@@ -50,7 +50,7 @@ function Checkout() {
         <div className="YourOrder-wrap">
           <span className="YourOrder">Your Order</span>
           <div className="Checkout-buttons">
-            <Link to="/">
+            <Link to="/restaurant">
               <Button variant="warning">Order More</Button>
             </Link>
             <Button onClick={clearOrder} variant="danger">

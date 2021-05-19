@@ -13,8 +13,7 @@ function CreateRestaurant() {
 
   const proceed = (e) => {
     e.preventDefault();
-    db.collection("users").doc(user.uid).set({
-      user: user.uid,
+    db.collection("restaurants").doc(user.uid).set({
       name: restro,
       location: "",
       email: user.email,
@@ -22,10 +21,6 @@ function CreateRestaurant() {
 
     history.push("/dashboard");
   };
-
-  useEffect(() => {
-    if (!user) history.push("/restaurant_login");
-  });
 
   return (
     <div>
