@@ -1,4 +1,4 @@
-.Login-container {
+.LoginContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,7 +6,7 @@
   font-family: "Ubuntu", sans-serif;
 }
 
-.Form-container {
+.FormContainer {
   user-select: none;
   text-align: center;
   /* margin-bottom: 20px; */
@@ -28,7 +28,7 @@
   align-items: flex-start;
 }
 
-.Form-input {
+.FormInput {
   font-size: large;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -37,6 +37,6 @@
   padding: 5px;
 }
 
-.Login-wrapper {
+.LoginWrapper {
   background-color: whitesmoke;
 }

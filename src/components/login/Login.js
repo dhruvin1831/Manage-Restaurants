@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import Container from "react-bootstrap/Container";
 import React, { useState, useEffect } from "react";
@@ -22,6 +23,10 @@ function Login() {
       .catch((err) => alert(err.message));
   };
 
+  useEffect(() => {
+    if (user) history.push("/dashboard");
+  }, [user]);
+
   const register = (e) => {
     e.preventDefault();
     auth
@@ -35,9 +40,9 @@ function Login() {
 
   return (
     <div>
-      <Container fluid className="Login-wrapper">
-        <div className="Login-container">
-          <span className="Form-container">
+      <Container fluid className="LoginWrapper">
+        <div className="LoginContainer">
+          <span className="FormContainer">
             <h1>Sign In</h1>
             <hr />
             <form className="Form">
@@ -45,7 +50,7 @@ function Login() {
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="Form-input"
+                className="FormInput"
                 type="email"
               />
               <h5>Password</h5>
