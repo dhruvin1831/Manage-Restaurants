@@ -57,7 +57,7 @@ function Login() {
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-                className="Form-input"
+                className="FormInput"
                 type="password"
               />
               <div className="Button-wrap">
