@@ -1,11 +1,184 @@
-import React from 'react'
-import "../../styles/AddNewItem.css"
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
+import "../../styles/AddNewItem.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import { firebaseApp } from "../../firebase";
+import { useStateValue } from "../../StateProvider";
+import { db } from "../../firebase";
+import firebase from "firebase/app";
+
 function AddNewItem() {
-    return (
-        <div>
-            Add
-        </div>
-    )
+  const [price, setPrice] = useState(0);
+  const [now, setNow] = useState(0);
+  const [fileUrl, setFileUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("Choose");
+  const [name, setName] = useState("");
+  const [foodCategories, setFoodCategories] = useState(null);
+  const [{ user }, dispatch] = useStateValue();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      name === "" ||
+      price === 0 ||
+      selectedCategory === null ||
+      fileUrl === null
+    ) {
+      alert("Enter data in all fields !!");
+      return;
+    }
+    await db.collection("restaurant-menus").doc(user?.uid).collection("food-items").add({
+      foodName: name,
+      price: price,
+      foodCategory: selectedCategory,
+      image: fileUrl,
+      isAvailable: true,
+    });
+
+    setPrice(0);
+    setName("");
+    setFileUrl(null);
+    setSelectedCategory(null);
+    setLoading(true);
+
+    alert("item added successfully");
+  };
+
+  const fileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = firebaseApp.storage().ref();
+    const userRef = storageRef.child(user?.uid);
+    const fileName = Date.now().toString();
+    const fileRef = userRef.child(fileName);
+    var uploadTask = await fileRef.put(file);
+
+    setFileUrl(await fileRef.getDownloadURL());
+  };
+
+  const addNewCategory = async () => {
+    var docRef = db.collection("restaurants").doc(user?.uid);
+    const newCategory = prompt("enter Food Category you want to add");
+
+    if (!newCategory) {
+      alert("enter valid food Category");
+      return;
+    }
+
+    await docRef.update({
+      foodCategories: firebase.firestore.FieldValue.arrayUnion(newCategory),
+    });
+    setLoading(true);
+  };
+
+  useEffect(() => {
+    const loadFoodCategories = async () => {
+      var docRef = db.collection("restaurants").doc(user?.uid);
+
+      const doc = await docRef.get();
+      if (doc.exists) {
+        setFoodCategories(doc.data().foodCategories);
+        setLoading(false);
+      }
+    };
+    loadFoodCategories();
+  }, [user, loading]);
+
+  const nameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  return (
+    <div>
+      <h2>Add Item :</h2>
+      <br />
+      {loading ? (
+        <h4>loading...</h4>
+      ) : (
+        <Form>
+          <Form.Group controlId="exampleForm.SelectCustom">
+            <Form.Label>Select Food Category :</Form.Label>{" "}
+            {selectedCategory !== "Choose" ? selectedCategory : ""}
+            <br />
+            <Form.Control
+              placeholder="Select Food Category"
+              style={{ minWidth: "200px" }}
+              as="select"
+              custom
+              onChange={(e) => {
+                setSelectedCategory(e.target.value);
+              }}
+              value={selectedCategory}
+            >
+              <option value="0">Choose</option>
+              {foodCategories?.map((item) => (
+                <option>{item}</option>
+              ))}
+            </Form.Control>{" "}
+            <Button size="sm" onClick={addNewCategory} variant="success">
+              Add New Food Category
+            </Button>
+          </Form.Group>
+          <br />
+          <Form.Group style={{ maxWidth: "330px" }} controlId="formBasicName">
+            <Form.Label>Food Item :</Form.Label>
+            <Form.Control
+              onChange={nameChange}
+              value={name}
+              type="text"
+              placeholder="Name of food Item"
+            />
+          </Form.Group>
+          <br />
+          <Form.Group style={{ maxWidth: "100px" }} controlId="formBasicName">
+            <Form.Label>Price :</Form.Label>
+            <Form.Control
+              value={price}
+              onChange={(e) => {
+                if (isNaN(e.target.value)) {
+                  alert("Enter valid Price");
+                } else {
+                  setPrice(e.target.value);
+                }
+              }}
+              type="text"
+              placeholder="Price"
+            />
+          </Form.Group>
+          <br />
+          <Form.Group>
+            <Form.File
+              onChange={fileChange}
+              id="exampleFormControlFile1"
+              label="Food image :"
+            />
+          </Form.Group>
+          <br />
+          <a target="_blank" href={fileUrl}>
+            View Uploaded File :{" "}
+            {fileUrl === null ? "file not uploaded yet" : ""}
+          </a>
+          <br />
+          <br />
+          File Uploading :
+          <ProgressBar
+            style={{ maxWidth: "330px" }}
+            now={now}
+            label={`${now}%`}
+          />
+          <br />
+          <Button onClick={onSubmit} variant="primary">
+            Submit
+          </Button>
+        </Form>
+      )}
+      <br />
+    </div>
+  );
 }
 
-export default AddNewItem
+export default AddNewItem;

@@ -8,7 +8,7 @@ function Menu() {
   const [state, setState] = useState("VIEW");
   return (
     <div>
-      <Container fluid className="MenuContainer">
+      <Container className="MenuContainer">
         <h2 className="MenuHeading">Manage Restaurant Menu </h2>
         <br />
         <Button

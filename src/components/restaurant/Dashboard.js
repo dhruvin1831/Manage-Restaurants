@@ -18,7 +18,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (!user) history.push("/restaurant_login");
-  },[user]);
+  }, [user]);
 
   useEffect(() => {
     var docRef = db.collection("restaurants").doc(user?.uid);

@@ -11,14 +11,19 @@ function CreateRestaurant() {
   const [restro, setRestro] = useState("");
   const history = useHistory();
 
-  const proceed = (e) => {
+  const proceed = async (e) => {
     e.preventDefault();
-    db.collection("restaurants").doc(user.uid).set({
-      name: restro,
-      location: "",
-      email: user.email,
-    });
-
+    await db
+      .collection("restaurants")
+      .doc(user?.uid)
+      .set({
+        name: restro,
+        location: "",
+        email: user.email,
+        id: user.uid,
+        createdAt: Date.now(),
+        foodCategories: ["test"],
+      });
     history.push("/dashboard");
   };
 
