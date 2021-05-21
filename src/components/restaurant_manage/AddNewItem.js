@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
@@ -32,13 +33,17 @@ function AddNewItem() {
       alert("Enter data in all fields !!");
       return;
     }
-    await db.collection("restaurant-menus").doc(user?.uid).collection("food-items").add({
-      foodName: name,
-      price: price,
-      foodCategory: selectedCategory,
-      image: fileUrl,
-      isAvailable: true,
-    });
+    await db
+      .collection("restaurant-menus")
+      .doc(user?.uid)
+      .collection("food-items")
+      .add({
+        foodName: name,
+        price: price,
+        foodCategory: selectedCategory,
+        image: fileUrl,
+        isAvailable: true,
+      });
 
     setPrice(0);
     setName("");
@@ -49,15 +54,44 @@ function AddNewItem() {
     alert("item added successfully");
   };
 
-  const fileChange = async (e) => {
+  const fileChange = (e) => {
     const file = e.target.files[0];
     const storageRef = firebaseApp.storage().ref();
     const userRef = storageRef.child(user?.uid);
     const fileName = Date.now().toString();
     const fileRef = userRef.child(fileName);
-    var uploadTask = await fileRef.put(file);
+    var uploadTask = fileRef.put(file);
 
-    setFileUrl(await fileRef.getDownloadURL());
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setNow(Math.round(progress));
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log("Upload is paused");
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        alert("File upload unsuccessful");
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          setFileUrl(downloadURL);
+        });
+      }
+    );
   };
 
   const addNewCategory = async () => {
@@ -127,6 +161,7 @@ function AddNewItem() {
           <Form.Group style={{ maxWidth: "330px" }} controlId="formBasicName">
             <Form.Label>Food Item :</Form.Label>
             <Form.Control
+              required
               onChange={nameChange}
               value={name}
               type="text"
@@ -137,6 +172,7 @@ function AddNewItem() {
           <Form.Group style={{ maxWidth: "100px" }} controlId="formBasicName">
             <Form.Label>Price :</Form.Label>
             <Form.Control
+              required
               value={price}
               onChange={(e) => {
                 if (isNaN(e.target.value)) {
@@ -158,18 +194,18 @@ function AddNewItem() {
             />
           </Form.Group>
           <br />
-          <a target="_blank" href={fileUrl}>
-            View Uploaded File :{" "}
-            {fileUrl === null ? "file not uploaded yet" : ""}
-          </a>
-          <br />
-          <br />
           File Uploading :
           <ProgressBar
             style={{ maxWidth: "330px" }}
             now={now}
             label={`${now}%`}
           />
+          <br />
+          <a target="_blank" href={fileUrl}>
+            View Uploaded File :{" "}
+            {fileUrl === null ? "file not uploaded yet" : ""}
+          </a>
+          <br />
           <br />
           <Button onClick={onSubmit} variant="primary">
             Submit
