@@ -1,4 +1,4 @@
-.LandingPage-body {
+.LandingPageBody {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   background-color: whitesmoke;
 }
 
-.Select-container {
+.LandingPageSelectContainer {
   user-select: none;
   text-align: center;
   /* margin-bottom: 20px; */
@@ -25,16 +25,16 @@
   cursor: pointer;
 }
 
-.wrapper {
+.LandingPageSelectWrapper {
   margin-bottom: 50px;
 }
 
-.wrapper :hover {
+.LandingPageSelectWrapper :hover {
   box-shadow: 0 4px 8px 0 rgba(0, 81, 255, 0.267),
     0 6px 20px 0 rgba(0, 81, 255, 0.267);
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.5s ease-in-out;
 }
 
-.Icon {
+.LandingPageIcon {
   box-shadow: none !important;
 }

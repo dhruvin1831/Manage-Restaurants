@@ -1,9 +1,9 @@
-.Header-nav {
+.DashboardHeaderNav {
   font-family: "Ubuntu", sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.267),
     0 6px 20px 0 rgba(0, 0, 0, 0.267) !important;
 }
 
-.button {
-  margin-right: 10px;
+.DashboardHeaderButton {
+  margin-right: 10px !important;
 }

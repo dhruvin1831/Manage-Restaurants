@@ -22,7 +22,7 @@ function DashboardHeader({ name }) {
       fixed="top"
       variant="dark"
       expand="md"
-      className="Header-nav"
+      className="DashboardHeaderNav"
     >
       <Container fluid>
         <Navbar.Brand
@@ -54,12 +54,16 @@ function DashboardHeader({ name }) {
               onClick={() =>
                 dispatch({ type: "SET_PAGE", page: "RestroAccount" })
               }
-              className="button"
+              className="DashboardHeaderButton"
               variant="success"
             >
               Account
             </Button>
-            <Button onClick={signOut} className="button" variant="danger">
+            <Button
+              onClick={signOut}
+              className="DashboardHeaderButton"
+              variant="danger"
+            >
               Sign-Out
             </Button>
           </Nav>

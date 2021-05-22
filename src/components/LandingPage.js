@@ -7,19 +7,19 @@ import { Link } from "react-router-dom";
 function LandingPage() {
   return (
     <div>
-      <Container fluid className="LandingPage-body">
-        <div className="wrapper">
+      <Container fluid className="LandingPageBody">
+        <div className="LandingPageSelectWrapper">
           <Link to="/restaurant_selection" style={{ textDecoration: "none" }}>
-            <span className="Select-container">
+            <span className="LandingPageSelectContainer">
               <PersonIcon className="Icon" style={{ fontSize: "40" }} />{" "}
               Customer
             </span>
           </Link>
         </div>
-        <div className="wrapper">
+        <div className="LandingPageSelectWrapper">
           <Link to="/restaurant_login" style={{ textDecoration: "none" }}>
-            <span className="Select-container">
-              <RestaurantIcon className="Icon" style={{ fontSize: "40" }} />{" "}
+            <span className="LandingPageSelectContainer">
+              <RestaurantIcon className="LandingPageIcon" style={{ fontSize: "40" }} />{" "}
               Restaurant
             </span>
           </Link>

@@ -30,24 +30,28 @@ function CreateRestaurant() {
   return (
     <div>
       <Container fluid>
-        <div className="restro-container">
-          <span className="Form-container">
+        <div className="RestroCreateContainer">
+          <span className="RestroCreateFormContainer">
             <h1>Provide Restaurant Details</h1>
-            {user ? <h5 className="email">Email : {user?.email}</h5> : ""}
+            {user ? (
+              <h5 className="RestroCreateEmail">Email : {user?.email}</h5>
+            ) : (
+              ""
+            )}
             <hr />
-            <form className="Form">
+            <form className="RestroCreateForm">
               <h5>Restaurant Name</h5>
               <input
                 value={restro}
                 onChange={(e) => setRestro(e.target.value)}
-                className="Form-input"
+                className="RestroCreateFormInput"
                 type="text"
               />
               <Button type="submit" variant="danger">
                 Mark Location
               </Button>
               <hr />
-              <div className="Button-wrap">
+              <div>
                 <Button onClick={proceed} type="submit" variant="success">
                   Proceed
                 </Button>

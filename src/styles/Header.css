@@ -1,11 +1,4 @@
-.Header-wrap {
-  /* border-bottom: 1px solid black; */
-  position: sticky !important;
-  top: 0;
-  z-index: 100;
-}
-
-.Header-nav {
+.RestaurantCustomerHeaderNav {
   font-family: "Ubuntu", sans-serif;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.267),
     0 6px 20px 0 rgba(0, 0, 0, 0.267) !important;

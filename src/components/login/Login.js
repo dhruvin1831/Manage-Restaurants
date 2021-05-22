@@ -42,25 +42,25 @@ function Login() {
     <div>
       <Container fluid className="LoginWrapper">
         <div className="LoginContainer">
-          <span className="FormContainer">
+          <span className="LoginFormContainer">
             <h1>Sign In</h1>
             <hr />
-            <form className="Form">
+            <form className="LoginForm">
               <h5>Email</h5>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="FormInput"
+                className="LoginFormInput"
                 type="email"
               />
               <h5>Password</h5>
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-                className="FormInput"
+                className="LoginFormInput"
                 type="password"
               />
-              <div className="Button-wrap">
+              <div className="LoginButtonWrap">
                 <Button type="submit" onClick={signIn} variant="success">
                   Sign In
                 </Button>

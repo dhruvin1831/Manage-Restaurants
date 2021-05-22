@@ -1,4 +1,4 @@
-.restro-container {
+.RestroCreateContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,7 +6,7 @@
   font-family: "Ubuntu", sans-serif;
 }
 
-.Form-container {
+.RestroCreateFormContainer {
   user-select: none;
   text-align: center;
   /* margin-bottom: 20px; */
@@ -22,13 +22,13 @@
   cursor: pointer;
 }
 
-.Form {
+.RestroCreateForm {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.Form-input {
+.RestroCreateFormInput {
   font-size: large;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -41,6 +41,6 @@
   background-color: whitesmoke;
 } */
 
-.email {
+.RestroCreateEmail {
   color: rgba(255, 196, 0, 0.856);
 }

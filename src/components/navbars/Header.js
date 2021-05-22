@@ -5,15 +5,17 @@ import Container from "react-bootstrap/Container";
 import "../../styles/Header.css";
 import { Link } from "react-router-dom";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
+import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router-dom";
 function Header() {
+  const history = useHistory();
   return (
-    // <div className="Header-wrap">
     <Navbar
       bg="dark"
       fixed="top"
       variant="dark"
       expand="md"
-      className="Header-nav"
+      className="RestaurantCustomerHeaderNav"
     >
       <Container fluid>
         <Navbar.Brand href="/restaurant">
@@ -22,7 +24,7 @@ function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="mr-auto" style={{ marginRight: "auto" }}>
             <Link style={{ textDecoration: "none" }} to="/restaurant">
               <Nav.Link href="/">Menu</Nav.Link>
             </Link>
@@ -30,10 +32,18 @@ function Header() {
               <Nav.Link href="/checkout">Your-Order</Nav.Link>
             </Link>
           </Nav>
+          <Nav>
+            <Button
+              onClick={() => history.push("/restaurant_selection")}
+              className="RestaurantCustomerHeaderButton"
+              variant="warning"
+            >
+              Explore
+            </Button>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    // </div>
   );
 }
 
