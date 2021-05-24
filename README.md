@@ -1,5 +1,5 @@
 # Manage-Restaurants
-This app provides functionalities for efficient management of restaurants like realtime food-menu with attractive images, updating current availibility, managing prices in real time and managing orders which helps restaurants in providing best customer experience. 
+This app provides functionalities for efficient management of restaurants like realtime food-menu with attractive images, updating current availibility, managing prices in real time and managing orders (payment processing under construction) which helps restaurants in providing best customer experience. 
 
 Customers can compare restaurants based on current availibility of preferred food, restaurnat timings, (location based recommendation under construction) which makes much easier for customers to search what they are looking for.
 
