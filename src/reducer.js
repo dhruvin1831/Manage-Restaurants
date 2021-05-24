@@ -3,6 +3,8 @@ export const initialState = {
   order: [],
   user: null,
   page: "Select",
+  restroPage: "menu",
+  filterCategory: "ALL",
 };
 
 const reducer = (state, action) => {
@@ -17,6 +19,7 @@ const reducer = (state, action) => {
       } else {
         newOrder = [...state.order, action.item];
       }
+
       return {
         ...state,
         order: newOrder,
@@ -26,7 +29,7 @@ const reducer = (state, action) => {
       const ind = state.order.findIndex(
         (orderItem) => orderItem.id === action.item.id
       );
-      let neworder;
+      let neworder = [];
       if (ind >= 0) {
         neworder = state.order.filter(
           (orderItem) => orderItem.id !== action.item.id
@@ -36,6 +39,7 @@ const reducer = (state, action) => {
         console.warn("Removing an item which is not ordered");
         return;
       }
+
       return {
         ...state,
         order: neworder,
@@ -59,6 +63,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         page: action.page,
+      };
+
+    case "SET_RESTRO_PAGE":
+      return {
+        ...state,
+        restroPage: action.page,
+      };
+
+    case "SET_FILTER":
+      return {
+        ...state,
+        filterCategory: action.category,
       };
   }
 };

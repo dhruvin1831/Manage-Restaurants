@@ -1,4 +1,4 @@
-.Checkout-container {
+.CheckoutContainer {
   background-color: whitesmoke;
   font-family: "Ubuntu", sans-serif;
   padding-top: 10px;
@@ -9,17 +9,17 @@
   min-height: 80vh;
 }
 
-.Checkout-items {
+.CheckoutItems {
   margin-top: 20px;
   max-width: fit-content;
 }
 
-.Checkout-items :hover {
+.CheckoutItems :hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.Checkout-placeOrder {
+.CheckoutPlaceOrder {
   margin: 20px;
   background-color: white;
   margin-top: 20px;
@@ -30,7 +30,7 @@
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
-.FoodItems-checkout {
+.FoodItemsCheckout {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -42,16 +42,16 @@
   margin-left: 20px;
 }
 
-.YourOrder-wrap {
+.YourOrderWrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.YourOrder-wrap > * {
+.YourOrderWrap > * {
   margin-right: 10px;
 }
 
-.Checkout-buttons > * {
+.CheckoutButtons > * {
   margin-right: 10px;
 }

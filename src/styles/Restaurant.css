@@ -1,4 +1,4 @@
-.Restaurant-body {
+.RestaurantBody {
   background-color: whitesmoke !important;
   font-family: "Ubuntu", sans-serif;
   padding-top: 10px;
@@ -8,11 +8,11 @@
   margin-top: 20px; */
 }
 
-.Restaurant-wrapper {
+.RestaurantWrapper {
   margin-top: 56px;
 }
 
-.Food-items-container {
+.FoodItemsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -21,7 +21,7 @@
   padding-bottom: 20px;
 }
 
-.Place-order {
+.OrderButton {
   position: fixed;
   bottom: 7vh;
   right: 5vw;
@@ -35,4 +35,11 @@
 .Place-order :active {
   outline-width: 3px;
   outline-color: black;
+}
+
+.FoodCategoryMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }

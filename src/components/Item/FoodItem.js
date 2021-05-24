@@ -8,7 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { useStateValue } from "../../StateProvider";
 
-function FoodItem({ id, image, name, price }) {
+function FoodItem({ id, key, image, name, price }) {
   // eslint-disable-next-line no-unused-vars
   const [{ order }, dispatch] = useStateValue();
   const [count, setCount] = useState(0);

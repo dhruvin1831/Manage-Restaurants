@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -6,9 +7,13 @@ import "../../styles/Header.css";
 import { Link } from "react-router-dom";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
 import Button from "react-bootstrap/Button";
-import { useHistory } from "react-router-dom";
-function Header() {
+import { useHistory, useParams } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
+function Header({ name, id }) {
+  const { resId } = useParams();
   const history = useHistory();
+  const [{ restroPage }, dispatch] = useStateValue();
+
   return (
     <Navbar
       bg="dark"
@@ -18,18 +23,41 @@ function Header() {
       className="RestaurantCustomerHeaderNav"
     >
       <Container fluid>
-        <Navbar.Brand href="/restaurant">
+        <Navbar.Brand>
           <RestaurantIcon />
-          {"  "}Restaurant XYZ
+          {"  "}
+          {name}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto" style={{ marginRight: "auto" }}>
-            <Link style={{ textDecoration: "none" }} to="/restaurant">
+            <Link
+              style={{ textDecoration: "none" }}
+              onClick={() =>
+                dispatch({
+                  type: "SET_RESTRO_PAGE",
+                  page: "menu",
+                })
+              }
+            >
               <Nav.Link href="/">Menu</Nav.Link>
             </Link>
-            <Link style={{ textDecoration: "none" }} to="/checkout">
-              <Nav.Link href="/checkout">Your-Order</Nav.Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              onClick={() =>
+                dispatch({
+                  type: "SET_RESTRO_PAGE",
+                  page: "checkout",
+                })
+              }
+            >
+              <Nav.Link href="/checkout">Your Order</Nav.Link>
+            </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              onClick={() => history.push("/place-order")}
+            >
+              <Nav.Link href="/checkout">Order History</Nav.Link>
             </Link>
           </Nav>
           <Nav>

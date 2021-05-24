@@ -10,7 +10,10 @@ import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import CreateRestaurant from "./components/restaurant/CreateRestaurant";
 import Dashboard from "./components/restaurant/Dashboard";
+import PlaceOrder from "./components/checkout/PlaceOrder";
+import { useHistory} from "react-router-dom";
 function App() {
+  
   const [state, dispatch] = useStateValue();
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -39,7 +42,7 @@ function App() {
           <Route path="/restaurant_selection">
             <RestaurantSelection />
           </Route>
-          <Route path="/checkout">
+          <Route path="/checkout/:resId">
             <Checkout />
           </Route>
           <Route path="/restaurant_login">
@@ -47,6 +50,9 @@ function App() {
           </Route>
           <Route path="/create_restaurant">
             <CreateRestaurant />
+          </Route>
+          <Route path="/place-order">
+            <PlaceOrder />
           </Route>
           <Route path="/dashboard">
             <Dashboard />

@@ -1,22 +1,41 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "../../styles/FoodCategory.css";
-function FoodCategory() {
+import { useStateValue } from "../../StateProvider";
+function FoodCategory({ categories }) {
+  const [{ filterCategory }, dispatch] = useStateValue();
   return (
     <>
-      <div className="FoodCategory-menu">
+      <div className="FoodCategoryMenu">
         <DropdownButton
           id="dropdown-basic-button"
           variant="success"
           title="Select FoodCategory"
         >
-          <Dropdown.Item href="#/action-1">All</Dropdown.Item>
-          <Dropdown.Item href="#/action-1">Chinese</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Italian</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Indian</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item href="#/action-4">Popular</Dropdown.Item>
+          <Dropdown.Item
+            onClick={() =>
+              dispatch({
+                type: "SET_FILTER",
+                category: "ALL",
+              })
+            }
+          >
+            All
+          </Dropdown.Item>
+          {categories?.map((item) => (
+            <Dropdown.Item
+              onClick={() =>
+                dispatch({
+                  type: "SET_FILTER",
+                  category: item,
+                })
+              }
+            >
+              {item}
+            </Dropdown.Item>
+          ))}
         </DropdownButton>
       </div>
     </>
