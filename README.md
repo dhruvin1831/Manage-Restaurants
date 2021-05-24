@@ -10,7 +10,7 @@
 #### which helps restaurants in efficiently handling the hassle of managing things updating in real time. <br/>
 
 .....
-## This app also provides functionalities for better customer experince: <br/>
+## This app also provides functionalities for better customer experience: <br/>
 -> Customers can compare restaurants based on current availibility of preferred food, restaurant timings.<br/>
 -> (Ratings and Location based recommendation under construction) <br/>
 #### which makes much easier for customers to search what they are looking for.<br/>
