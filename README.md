@@ -1,7 +1,17 @@
-# Manage-Restaurants
-This app provides functionalities for efficient management of restaurants like realtime food-menu with attractive images, updating current availibility, managing prices in real time and managing orders (payment processing under construction) which helps restaurants in providing best customer experience. 
+# Manage-Restaurants:
 
-Customers can compare restaurants based on current availibility of preferred food, restaurnat timings, (location based recommendation under construction) which makes much easier for customers to search what they are looking for.
+##This app provides functionalities for efficient management of restaurants: 
+
+-> Realtime food-menu with attractive images. 
+-> Updating current availibility. 
+-> Managing prices in real time and managing orders.
+-> (Payment processing under construction) 
+which helps restaurants in efficiently handling the hassle of managing things updating in real time. 
+
+##This app also provides functionalities for better customer experince: 
+-> Customers can compare restaurants based on current availibility of preferred food, restaurnat timings.
+-> (Location based recommendation under construction) 
+which makes much easier for customers to search what they are looking for.
 
 # Getting Started with Create React App
 
