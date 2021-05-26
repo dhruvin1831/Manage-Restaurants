@@ -13,16 +13,17 @@
   user-select: none;
   text-align: center;
   /* margin-bottom: 20px; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 20px;
   min-width: 300px;
   font-size: xx-large;
-  background-color: black;
-  color: whitesmoke;
+  background-color: rgb(248, 168, 20);
+  color: rgb(0, 21, 54);
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.267),
     0 6px 20px 0 rgba(0, 0, 0, 0.267);
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .LandingPageSelectWrapper {
@@ -30,9 +31,12 @@
 }
 
 .LandingPageSelectWrapper :hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 81, 255, 0.267),
-    0 6px 20px 0 rgba(0, 81, 255, 0.267);
-  transition: box-shadow 0.5s ease-in-out;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 81, 255, 0.267),
+    0 6px 20px 0 rgba(0, 81, 255, 0.267); */
+
+  /* transition: color 0.5s ease-in-out;s */
+  background-color: rgb(0, 21, 54);
+  color: rgb(248, 168, 20);
 }
 
 .LandingPageIcon {

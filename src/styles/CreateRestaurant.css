@@ -10,12 +10,12 @@
   user-select: none;
   text-align: center;
   /* margin-bottom: 20px; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 20px;
   min-width: 300px;
   font-size: xx-large;
-  background-color: black;
-  color: whitesmoke;
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(0, 0, 0);
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.267),
     0 6px 20px 0 rgba(0, 0, 0, 0.267);
@@ -33,8 +33,13 @@
   margin-bottom: 20px;
   border-radius: 10px;
   outline: none;
-  border: none;
+  border: 2px solid rgb(248, 168, 20);
   padding: 5px;
+}
+
+.RestroCreateFormInput:focus {
+  border: 2px solid rgb(6, 98, 247);
+  transition: 0.3s ease-in-out;
 }
 
 /* .wrapper {
@@ -42,5 +47,5 @@
 } */
 
 .RestroCreateEmail {
-  color: rgba(255, 196, 0, 0.856);
+  color: rgb(6, 98, 247);
 }

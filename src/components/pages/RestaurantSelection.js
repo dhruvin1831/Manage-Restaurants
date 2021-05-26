@@ -18,10 +18,10 @@ import {
 } from "react-router-dom";
 function RestaurantSelection() {
   const history = useHistory();
-
   const [{ order }, dispatch] = useStateValue();
   let match = useRouteMatch();
   const [restaurants, setRestaurants] = useState(null);
+
   useEffect(() => {
     var unsubscribe = db.collection("restaurants").onSnapshot((snapShot) => {
       setRestaurants(

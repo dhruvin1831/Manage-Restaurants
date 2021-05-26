@@ -11,7 +11,12 @@ function LandingPage() {
         <div className="LandingPageSelectWrapper">
           <Link to="/restaurant_selection" style={{ textDecoration: "none" }}>
             <span className="LandingPageSelectContainer">
-              <PersonIcon className="Icon" style={{ fontSize: "40" }} />{" "}
+              <PersonIcon
+                className="Icon"
+                style={{
+                  fontSize: "40",
+                }}
+              />{" "}
               Customer
             </span>
           </Link>
@@ -19,7 +24,10 @@ function LandingPage() {
         <div className="LandingPageSelectWrapper">
           <Link to="/restaurant_login" style={{ textDecoration: "none" }}>
             <span className="LandingPageSelectContainer">
-              <RestaurantIcon className="LandingPageIcon" style={{ fontSize: "40" }} />{" "}
+              <RestaurantIcon
+                className="LandingPageIcon"
+                style={{ fontSize: "40", transition: "none" }}
+              />{" "}
               Restaurant
             </span>
           </Link>

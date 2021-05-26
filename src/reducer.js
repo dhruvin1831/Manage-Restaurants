@@ -5,6 +5,7 @@ export const initialState = {
   page: "Select",
   restroPage: "menu",
   filterCategory: "ALL",
+  location: null,
 };
 
 const reducer = (state, action) => {
@@ -75,6 +76,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         filterCategory: action.category,
+      };
+
+    case "SET_LOCATION":
+      console.log("location set", action.location);
+      return {
+        ...state,
+        location: action.location,
       };
   }
 };

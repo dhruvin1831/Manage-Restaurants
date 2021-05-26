@@ -6,19 +6,23 @@ import Button from "react-bootstrap/Button";
 import "../../styles/CreateRestaurant.css";
 import { db } from "../../firebase";
 import { useHistory } from "react-router-dom";
+import MapsModal from "../maps/MapsModal";
 function CreateRestaurant() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, location }, dispatch] = useStateValue();
   const [restro, setRestro] = useState("");
   const history = useHistory();
+  const [modalShow, setModalShow] = useState(false);
 
   const proceed = async (e) => {
     e.preventDefault();
+    if (location === null) return alert("Please Mark Location");
+    if (restro === "") return alert("Please Enter Name");
     await db
       .collection("restaurants")
       .doc(user?.uid)
       .set({
         name: restro,
-        location: "",
+        location: location,
         email: user.email,
         id: user.uid,
         createdAt: Date.now(),
@@ -47,9 +51,14 @@ function CreateRestaurant() {
                 className="RestroCreateFormInput"
                 type="text"
               />
-              <Button type="submit" variant="danger">
+              <Button variant="danger" onClick={() => setModalShow(true)}>
                 Mark Location
               </Button>
+              {location === null ? (
+                <h6>location not marked</h6>
+              ) : (
+                <h6>location marked</h6>
+              )}
               <hr />
               <div>
                 <Button onClick={proceed} type="submit" variant="success">
@@ -60,6 +69,8 @@ function CreateRestaurant() {
           </span>
         </div>
       </Container>
+
+      <MapsModal show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 }
