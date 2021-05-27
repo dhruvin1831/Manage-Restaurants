@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-webpack-loader-syntax */
 /* eslint-disable no-unused-vars */
@@ -23,43 +25,16 @@ const navStyle = {
   padding: "10px",
 };
 
-export default function MarkRestaurantLocation() {
-  const [{ location }, dispatch] = useStateValue();
+export default function MarkRestaurantLocation({ restaurants }) {
   const [viewport, setViewport] = useState({
     latitude: 40,
     longitude: -100,
-    zoom: 3.5,
+    zoom: 7,
     bearing: 0,
     pitch: 0,
   });
-  const [marker, setMarker] = useState({
-    latitude: 40,
-    longitude: -100,
-  });
-  const [events, logEvents] = useState({});
-
-  const onMarkerDragStart = useCallback((event) => {
-    logEvents((_events) => ({ ..._events, onDragStart: event.lngLat }));
-  }, []);
-
-  const onMarkerDrag = useCallback((event) => {
-    logEvents((_events) => ({ ..._events, onDrag: event.lngLat }));
-  }, []);
-
-  const onMarkerDragEnd = useCallback((event) => {
-    logEvents((_events) => ({ ..._events, onDragEnd: event.lngLat }));
-    setMarker({
-      longitude: event.lngLat[0],
-      latitude: event.lngLat[1],
-    });
-    dispatch({
-      type: "SET_LOCATION",
-      location: {
-        longitude: event.lngLat[0],
-        latitude: event.lngLat[1],
-      },
-    });
-  }, []);
+  const [markers, setMarkers] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
     getLocation();
@@ -101,23 +76,14 @@ export default function MarkRestaurantLocation() {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     });
-
-    setMarker({
+    setUserLocation({
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-    });
-
-    dispatch({
-      type: "SET_LOCATION",
-      location: {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      },
     });
   }
 
   return (
-    <div style={{ width: "inherit", height: "inherit" }}>
+    <div>
       <MapGL
         {...viewport}
         width="100%"
@@ -126,18 +92,33 @@ export default function MarkRestaurantLocation() {
         onViewportChange={setViewport}
         mapboxApiAccessToken={TOKEN}
       >
-        <Marker
-          longitude={marker.longitude}
-          latitude={marker.latitude}
-          offsetTop={-20}
-          offsetLeft={-10}
-          draggable
-          onDragStart={onMarkerDragStart}
-          onDrag={onMarkerDrag}
-          onDragEnd={onMarkerDragEnd}
-        >
-          <Pin size={20} />
-        </Marker>
+        {userLocation !== null ? (
+          <Marker
+            longitude={userLocation.longitude}
+            latitude={userLocation.latitude}
+            offsetTop={-20}
+            offsetLeft={-10}
+          >
+            <Pin size={20} />
+          </Marker>
+        ) : (
+          ""
+        )}
+
+        {restaurants?.map((restro) => {
+          if (restro.data.location !== "") {
+            return (
+              <Marker
+                longitude={restro.data.location.longitude}
+                latitude={restro.data.location.latitude}
+                offsetTop={-20}
+                offsetLeft={-10}
+              >
+                <Pin size={20} />
+              </Marker>
+            );
+          }
+        })}
 
         <div className="nav" style={navStyle}>
           <NavigationControl />

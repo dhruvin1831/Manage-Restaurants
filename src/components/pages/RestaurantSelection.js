@@ -7,6 +7,7 @@ import { useStateValue } from "../../StateProvider";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/esm/Button";
 import { useHistory } from "react-router-dom";
+import ShowLocation from "../maps/ShowLocation";
 import { db } from "../../firebase";
 import {
   BrowserRouter as Router,
@@ -37,26 +38,34 @@ function RestaurantSelection() {
   }, []);
 
   return (
-    <div>
+    <div className="RestaurantSelectionBody">
       <Switch>
         <Route path={`${match.path}/:resId`}>
           <Restaurant />
         </Route>
         <Route path={match.path}>
           <div>
-            <Jumbotron className="PlaceOrderUnderConstruction">
-              <h2>Location Based Restaurants Under Construction</h2>
+            {/* <Jumbotron className="PlaceOrderUnderConstruction"> */}
+            {/* <h2>Location Based Restaurants Under Construction</h2>
               <Button
                 onClick={() => history.push("/")}
                 className="PlaceOrderButton"
                 variant="warning"
               >
                 Home
-              </Button>
-            </Jumbotron>
+              </Button> */}
+            {/* </Jumbotron> */}
+            <Container style={{ paddingTop: "20px" }}>
+              <span className="RestaurantSelectionMessaage">
+                Explore Restaurants Around You
+              </span>
+              <ShowLocation restaurants={restaurants} />
+            </Container>
             <hr />
             <Container fluid>
-              <h3>Select from available restaurants :</h3>
+              <h3>
+                Select from available restaurants : (current all rendered)
+              </h3>
               {restaurants === null ? "No restaurants" : ""}
               {restaurants?.map((restaurant) => (
                 <div>
