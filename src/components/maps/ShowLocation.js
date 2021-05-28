@@ -5,13 +5,23 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useState, useCallback, useEffect } from "react";
-import MapGL, { Marker, NavigationControl } from "react-map-gl";
+import MapGL, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { useStateValue } from "../../StateProvider";
 import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import ControlPanel from "./control-panel";
 import Pin from "./pin";
 import "../../styles/MarkRestaurantLocation.css";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+} from "react-router-dom";
 mapboxgl.workerClass =
   require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
@@ -26,6 +36,8 @@ const navStyle = {
 };
 
 export default function MarkRestaurantLocation({ restaurants }) {
+  let match = useRouteMatch();
+  const [selectedRestro, setSelectedRestro] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 40,
     longitude: -100,
@@ -99,7 +111,7 @@ export default function MarkRestaurantLocation({ restaurants }) {
             offsetTop={-20}
             offsetLeft={-10}
           >
-            <Pin size={20} />
+            <Pin color="red" size={20} />
           </Marker>
         ) : (
           ""
@@ -114,7 +126,14 @@ export default function MarkRestaurantLocation({ restaurants }) {
                 offsetTop={-20}
                 offsetLeft={-10}
               >
-                <Pin size={20} />
+                <div
+                  onClick={() => {
+                    console.log(restro);
+                    setSelectedRestro(restro);
+                  }}
+                >
+                  <Pin color={"#00008b"} size={20} />
+                </div>
               </Marker>
             );
           }
@@ -123,7 +142,36 @@ export default function MarkRestaurantLocation({ restaurants }) {
         <div className="nav" style={navStyle}>
           <NavigationControl />
         </div>
+
+        {selectedRestro && (
+          <Popup
+            longitude={selectedRestro.data.location.longitude}
+            latitude={selectedRestro.data.location.latitude}
+            closeButton={true}
+            closeOnClick={false}
+            onClose={() => setSelectedRestro(false)}
+            anchor="top"
+          >
+            <div>
+              <Card style={{ width: "10rem", marginTop: "10px" }}>
+                <Card.Img
+                  variant="top"
+                  src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                />
+                <Card.Body>
+                  <Card.Title>{selectedRestro.data.name}</Card.Title>
+                  <Link to={`${match.url}/${selectedRestro.id}`}>
+                    <Button size="sm" variant="info">
+                      Go to Restaurant
+                    </Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+            </div>
+          </Popup>
+        )}
       </MapGL>
+
       {/* <ControlPanel events={events} /> */}
     </div>
   );

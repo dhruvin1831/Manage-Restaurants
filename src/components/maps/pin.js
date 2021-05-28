@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 
 const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
@@ -10,10 +11,10 @@ const pinStyle = {
 };
 
 function Pin(props) {
-  const { size = 20 } = props;
+  const { size = 20 } = props.size;
 
   return (
-    <svg height={size} viewBox="0 0 24 24" style={pinStyle}>
+    <svg height={size} viewBox="0 0 24 24" style={{fill: props.color, stroke: "none"}}>
       <path d={ICON} />
     </svg>
   );

@@ -45,21 +45,17 @@ function RestaurantSelection() {
         </Route>
         <Route path={match.path}>
           <div>
-            {/* <Jumbotron className="PlaceOrderUnderConstruction"> */}
-            {/* <h2>Location Based Restaurants Under Construction</h2>
-              <Button
-                onClick={() => history.push("/")}
-                className="PlaceOrderButton"
-                variant="warning"
-              >
-                Home
-              </Button> */}
-            {/* </Jumbotron> */}
             <Container style={{ paddingTop: "20px" }}>
               <span className="RestaurantSelectionMessaage">
                 Explore Restaurants Around You
               </span>
               <ShowLocation restaurants={restaurants} />
+              <span
+                style={{ backgroundColor: "whitesmoke", color: "red" }}
+                className="RestaurantSelectionMessaage"
+              >
+                Click Marker to see info
+              </span>
             </Container>
             <hr />
             <Container fluid>
