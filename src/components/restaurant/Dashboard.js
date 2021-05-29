@@ -9,6 +9,7 @@ import RestroAccount from "./RestroAccount";
 import Orders from "./Orders";
 import Menu from "./Menu";
 import { useHistory } from "react-router-dom";
+import { Container } from "@material-ui/core";
 
 function Dashboard() {
   const history = useHistory();
@@ -40,21 +41,23 @@ function Dashboard() {
       });
   }, [user]);
   return (
-    <div>
-      <DashboardHeader name={name} />
-      <div style={{ marginTop: "56px" }}></div>
-      {page === "Select" ? (
-        <Select />
-      ) : page === "RestroAccount" ? (
-        <RestroAccount email={email} />
-      ) : page === "Orders" ? (
-        <Orders />
-      ) : page === "Menu" ? (
-        <Menu />
-      ) : (
-        ""
-      )}
-    </div>
+    <Container style={{ backgroundColor: "whitesmoke", minHeight: "100vh" }}>
+      <div>
+        <DashboardHeader name={name} />
+        <div style={{ marginTop: "56px" }}></div>
+        {page === "Select" ? (
+          <Select />
+        ) : page === "RestroAccount" ? (
+          <RestroAccount email={email} />
+        ) : page === "Orders" ? (
+          <Orders />
+        ) : page === "Menu" ? (
+          <Menu />
+        ) : (
+          ""
+        )}
+      </div>
+    </Container>
   );
 }
 

@@ -9,4 +9,30 @@
 
 .RestaurantSelectionBody {
   background-color: whitesmoke;
+  min-height: 100vh;
+}
+
+.RestaurantsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-around;
+  justify-items: center;
+  padding-bottom: 20px;
+}
+
+.RestaurantsContainer > * {
+  margin-bottom: 25px;
+}
+
+.RestaurantSelectionRestaurant {
+  transition: box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  float: left;
+  box-shadow: 0 0 10px rgba(33, 33, 33, 0.2);
+}
+.RestaurantSelectionRestaurant:hover {
+  box-shadow: 0 0 40px rgba(33, 33, 33, 0.2);
 }

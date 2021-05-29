@@ -145,6 +145,7 @@ export default function MarkRestaurantLocation({ restaurants }) {
 
         {selectedRestro && (
           <Popup
+            style={{ padding: 0 }}
             longitude={selectedRestro.data.location.longitude}
             latitude={selectedRestro.data.location.latitude}
             closeButton={true}
@@ -152,22 +153,20 @@ export default function MarkRestaurantLocation({ restaurants }) {
             onClose={() => setSelectedRestro(false)}
             anchor="top"
           >
-            <div>
-              <Card style={{ width: "10rem", marginTop: "10px" }}>
-                <Card.Img
-                  variant="top"
-                  src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                />
-                <Card.Body>
-                  <Card.Title>{selectedRestro.data.name}</Card.Title>
-                  <Link to={`${match.url}/${selectedRestro.id}`}>
-                    <Button size="sm" variant="info">
-                      Go to Restaurant
-                    </Button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            </div>
+            <Card style={{ width: "10rem", marginTop: "10px" }}>
+              <Card.Img
+                variant="top"
+                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+              />
+              <Card.Body>
+                <Card.Title>{selectedRestro.data.name}</Card.Title>
+                <Link to={`${match.url}/${selectedRestro.id}`}>
+                  <Button size="sm" variant="info">
+                    Go to Restaurant
+                  </Button>
+                </Link>
+              </Card.Body>
+            </Card>
           </Popup>
         )}
       </MapGL>

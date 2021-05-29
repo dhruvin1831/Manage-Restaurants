@@ -11,6 +11,7 @@ import { firebaseApp } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 import { db } from "../../firebase";
 import firebase from "firebase/app";
+import Container from "react-bootstrap/esm/Container";
 
 function AddNewItem() {
   const [price, setPrice] = useState(0);
