@@ -39,6 +39,7 @@ function CreateRestaurant() {
 
   const fileChange = (e) => {
     const file = e.target.files[0];
+    if (file === null) return;
     var t = file.type.split("/").pop().toLowerCase();
     if (
       t !== "jpeg" &&
@@ -53,6 +54,7 @@ function CreateRestaurant() {
     }
     if (file.size > 1024000) {
       alert("Max Upload size is 1MB only");
+      document.getElementById("exampleFormControlFile1").value = "";
       return false;
     }
     const storageRef = firebaseApp.storage().ref();
