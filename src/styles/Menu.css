@@ -8,6 +8,7 @@
 
 .MenuHeading {
   color: rgb(4, 50, 122);
+  margin-bottom: 15px;
 }
 
 .MenuHeadingButton {
@@ -16,5 +17,10 @@
 
 .MenuButtons {
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.MenuButtons > * {
+  margin-bottom: 10px;
 }

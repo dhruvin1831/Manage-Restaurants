@@ -8,12 +8,8 @@
 
 .RestroCreateFormContainer {
   user-select: none;
-  text-align: center;
-  /* margin-bottom: 20px; */
-  /* border: 1px solid black; */
   padding: 20px;
   min-width: 300px;
-  font-size: xx-large;
   background-color: rgba(255, 255, 255, 0);
   color: rgb(0, 0, 0);
   border-radius: 10px;
@@ -48,4 +44,10 @@
 
 .RestroCreateEmail {
   color: rgb(6, 98, 247);
+}
+
+.CreateRestaurantButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

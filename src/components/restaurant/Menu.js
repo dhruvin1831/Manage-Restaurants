@@ -10,35 +10,39 @@ function Menu() {
     <div>
       <Container className="MenuContainer">
         <h2 className="MenuHeading">Manage Restaurant Menu </h2>
-        <br />
+
         <div className="MenuButtons">
           <Button
+            size="sm"
             onClick={() => setState("ADD")}
             className="MenuHeadingButton"
             variant="success"
           >
-            Add Item
+            Add
           </Button>
           <Button
+            size="sm"
             onClick={() => setState("REMOVE")}
             className="MenuHeadingButton"
             variant="danger"
           >
-            Remove Item
+            Remove
           </Button>
           <Button
+            size="sm"
             onClick={() => setState("MANAGE")}
             className="MenuHeadingButton"
             variant="warning"
           >
-            Manage Menu
+            Manage
           </Button>
           <Button
+            size="sm"
             onClick={() => setState("VIEW")}
             className="MenuHeadingButton"
             variant="dark"
           >
-            View Current Menu
+            Current Menu
           </Button>
         </div>
         <hr />

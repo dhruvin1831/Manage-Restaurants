@@ -142,6 +142,7 @@ function RestaurantSelection() {
                     userLocation.latitude,
                     dist
                   );
+
                   if (dist < 50) {
                     return (
                       <div>
@@ -150,8 +151,13 @@ function RestaurantSelection() {
                           className="RestaurantSelectionRestaurant"
                         >
                           <Card.Img
+                            style={{ maxHeight: "11rem" }}
                             variant="top"
-                            src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                            src={
+                              restaurant.data.profileImage
+                                ? restaurant.data.profileImage
+                                : "https://images.unsplash.com/photo-1552566626-52f8b828add9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                            }
                           />
                           <Card.Body>
                             <Card.Title>{restaurant.data.name}</Card.Title>

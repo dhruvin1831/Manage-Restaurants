@@ -4,15 +4,16 @@ import Container from "react-bootstrap/Container";
 function RestroAccount({ email }) {
   return (
     <div>
-      <Container className="RestroContainer">
-        <h2 className="RestroHeading">Your Account </h2>
+      <Container className="RestroAccountContainer">
+        <h2 className="RestroAccountHeading">Your Account </h2>
+        <h6 className="">Email : {email}</h6>
         <hr />
-        <h6 className="RestroHeading">Email : {email}</h6>
         Manage Location
         <br />
         Manage Name
-        <br /> Manage Email
         <br /> Manage Other Info
+        <br /> Manage Profile Photo
+        <br /> Manage Cover Photos
       </Container>
     </div>
   );

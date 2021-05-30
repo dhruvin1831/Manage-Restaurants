@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useStateValue } from "../../StateProvider";
@@ -7,28 +8,90 @@ import "../../styles/CreateRestaurant.css";
 import { db } from "../../firebase";
 import { useHistory } from "react-router-dom";
 import MapsModal from "../maps/MapsModal";
+import Form from "react-bootstrap/Form";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import firebase from "firebase/app";
+import { firebaseApp } from "../../firebase";
 function CreateRestaurant() {
   const [{ user, location }, dispatch] = useStateValue();
   const [restro, setRestro] = useState("");
   const history = useHistory();
   const [modalShow, setModalShow] = useState(false);
+  const [now, setNow] = useState(0);
+  const [fileUrl, setFileUrl] = useState(null);
 
   const proceed = async (e) => {
     e.preventDefault();
-    if (location === null) return alert("Please Mark Location");
     if (restro === "") return alert("Please Enter Name");
-    await db
-      .collection("restaurants")
-      .doc(user?.uid)
-      .set({
-        name: restro,
-        location: location,
-        email: user.email,
-        id: user.uid,
-        createdAt: Date.now(),
-        foodCategories: ["test"],
-      });
+    if (fileUrl === null) return alert("please upload Profile Image");
+    if (location === null) return alert("Please Mark Location");
+    await db.collection("restaurants").doc(user?.uid).set({
+      name: restro,
+      location: location,
+      email: user.email,
+      id: user.uid,
+      createdAt: Date.now(),
+      foodCategories: [],
+      profileImage: fileUrl,
+    });
     history.push("/dashboard");
+  };
+
+  const fileChange = (e) => {
+    const file = e.target.files[0];
+    var t = file.type.split("/").pop().toLowerCase();
+    if (
+      t !== "jpeg" &&
+      t !== "jpg" &&
+      t !== "png" &&
+      t !== "bmp" &&
+      t !== "gif"
+    ) {
+      alert("Please select a valid image file");
+      document.getElementById("exampleFormControlFile1").value = "";
+      return false;
+    }
+    if (file.size > 1024000) {
+      alert("Max Upload size is 1MB only");
+      return false;
+    }
+    const storageRef = firebaseApp.storage().ref();
+    const userRef = storageRef.child(user?.uid);
+    const fileName = "ProfileImage";
+    const fileRef = userRef.child(fileName);
+    var uploadTask = fileRef.put(file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setNow(Math.round(progress));
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log("Upload is paused");
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log("Upload is running");
+            break;
+          default:
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        alert("File upload unsuccessful");
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log("File available at", downloadURL);
+          setFileUrl(downloadURL);
+        });
+      }
+    );
   };
 
   return (
@@ -43,29 +106,61 @@ function CreateRestaurant() {
               ""
             )}
             <hr />
-            <form className="RestroCreateForm">
-              <h5>Restaurant Name</h5>
-              <input
-                value={restro}
-                onChange={(e) => setRestro(e.target.value)}
-                className="RestroCreateFormInput"
-                type="text"
+
+            <Form>
+              <Form.Group
+                style={{ maxWidth: "330px" }}
+                controlId="formBasicName"
+              >
+                <Form.Label>Restaurant Name :</Form.Label>
+                <Form.Control
+                  required
+                  onChange={(e) => setRestro(e.target.value)}
+                  value={restro}
+                  type="text"
+                  placeholder="Restaurant Name"
+                />
+              </Form.Group>
+              <br />
+              <Form.Group>
+                <Form.File
+                  required
+                  onChange={fileChange}
+                  id="exampleFormControlFile1"
+                  label="Profile Image :"
+                />
+              </Form.Group>
+              <br />
+              File Uploading :
+              <ProgressBar
+                style={{ maxWidth: "330px" }}
+                now={now}
+                label={`${now}%`}
               />
+              <br />
+              <a target="_blank" href={fileUrl}>
+                View Uploaded File :{" "}
+                {fileUrl === null ? "file not uploaded yet" : ""}
+              </a>
+              <br />
+            </Form>
+
+            <hr />
+            <div className="CreateRestaurantButtons">
               <Button variant="danger" onClick={() => setModalShow(true)}>
                 Mark Location
               </Button>
-              {location === null ? (
-                <h6>location not marked</h6>
-              ) : (
-                <h6>location marked</h6>
-              )}
-              <hr />
-              <div>
-                <Button onClick={proceed} type="submit" variant="success">
-                  Proceed
-                </Button>
-              </div>
-            </form>
+              {/* {location === null ? (
+              <h6>location not marked</h6>
+            ) : (
+              <h6>location marked</h6>
+            )}
+            <br /> */}
+
+              <Button onClick={proceed} type="submit" variant="success">
+                Proceed
+              </Button>
+            </div>
           </span>
         </div>
       </Container>

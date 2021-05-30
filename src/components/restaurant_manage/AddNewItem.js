@@ -51,12 +51,29 @@ function AddNewItem() {
     setFileUrl(null);
     setSelectedCategory(null);
     setLoading(true);
+    setNow(0);
 
     alert("item added successfully");
   };
 
   const fileChange = (e) => {
     const file = e.target.files[0];
+    var t = file.type.split("/").pop().toLowerCase();
+    if (
+      t !== "jpeg" &&
+      t !== "jpg" &&
+      t !== "png" &&
+      t !== "bmp" &&
+      t !== "gif"
+    ) {
+      alert("Please select a valid image file");
+      document.getElementById("exampleFormControlFile1").value = "";
+      return false;
+    }
+    if (file.size > 1024000) {
+      alert("Max Upload size is 1MB only");
+      return false;
+    }
     const storageRef = firebaseApp.storage().ref();
     const userRef = storageRef.child(user?.uid);
     const fileName = Date.now().toString();
