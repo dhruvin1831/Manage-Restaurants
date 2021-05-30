@@ -34,6 +34,7 @@ function Restaurant() {
   };
 
   useEffect(() => {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     var unsubscribe = db.collection("restaurants").onSnapshot((snapShot) => {
       snapShot.docs.forEach((doc) => {
         if (doc.id === resId) {

@@ -66,43 +66,39 @@ function FoodItemCheckout({ id, image, name, price, quantity }) {
   };
   return (
     <>
-      <div className="FoodItem-checkout">
-        <Card className="FoodItem-left">
-          <Card.Img variant="top" src={image} />
-        </Card>
-        <Card className="FoodItem-right">
-          <Card.Body>
-            <Card.Title>
-              <div className="Foodinfo">
-                <span>{name}</span>
-                <pre> </pre>
-                <span className="Food-price">&#8377; {price}</span>
-              </div>
-            </Card.Title>
-            <hr />
-            <div className="FoodItem-manage">
-              <Button
-                onClick={addItem}
-                variant="success"
-                className="Add-remove"
-              >
-                <AddIcon />
-              </Button>{" "}
-              {quantity}{" "}
-              <Button
-                onClick={removeItem}
-                variant="danger"
-                className="Add-remove"
-              >
-                <RemoveIcon />
-              </Button>
-              <span className="Food-total">
-                Total &#8377; {calculateTotalAmount()}
-              </span>
+      <Card className="CheckoutFoodItem">
+        <Card.Img variant="top" src={image} style={{ height: "12rem" }} />
+        <Card.Body>
+          <Card.Title>
+            <div className="Foodinfo">
+              <span>{name}</span>
+              <pre> </pre>
+              <span className="FoodPrice">&#8377; {price}</span>
             </div>
-          </Card.Body>
-        </Card>
-      </div>
+          </Card.Title>
+          <hr />
+          <Button
+            size="sm"
+            onClick={addItem}
+            variant="success"
+            className="AddRemove"
+          >
+            <AddIcon />
+          </Button>{" "}
+          {quantity}{" "}
+          <Button
+            size="sm"
+            onClick={removeItem}
+            variant="danger"
+            className="AddRemove"
+          >
+            <RemoveIcon />
+          </Button>
+          <span className="CheckoutFoodTotal">
+            Total &#8377; {calculateTotalAmount()}
+          </span>
+        </Card.Body>
+      </Card>
     </>
   );
 }

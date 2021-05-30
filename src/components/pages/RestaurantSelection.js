@@ -166,7 +166,10 @@ function RestaurantSelection() {
                               and make up the bulk of the card's content.
                             </Card.Text>
                             <Link to={`${match.url}/${restaurant.id}`}>
-                              <Button size="sm" variant="success">
+                              <Button
+                                size="sm"
+                                variant="success"
+                              >
                                 Go To Restaurant
                               </Button>
                             </Link>

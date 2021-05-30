@@ -69,20 +69,30 @@ function FoodItem({ id, key, image, name, price }) {
   return (
     <>
       <Card className="FoodItem">
-        <Card.Img variant="top" src={image} />
+        <Card.Img variant="top" src={image} style={{ height: "12rem" }} />
         <Card.Body>
           <Card.Title>
             <div className="Foodinfo">
               <span>{name}</span>
-              <span className="Food-price">&#8377; {price}</span>
+              <span className="FoodPrice">&#8377; {price}</span>
             </div>
           </Card.Title>
           <hr />
-          <Button onClick={addItem} variant="success" className="Add-remove">
+          <Button
+            size="sm"
+            onClick={addItem}
+            variant="success"
+            className="AddRemove"
+          >
             <AddIcon />
           </Button>{" "}
           {count}{" "}
-          <Button onClick={removeItem} variant="danger" className="Add-remove">
+          <Button
+            size="sm"
+            onClick={removeItem}
+            variant="danger"
+            className="AddRemove"
+          >
             <RemoveIcon />
           </Button>
         </Card.Body>

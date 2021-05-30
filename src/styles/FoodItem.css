@@ -1,17 +1,17 @@
 .FoodItem {
   width: clamp(10rem, 14rem, 18rem);
   margin-top: 30px !important;
+  transition: box-shadow 0.3s ease-in-out;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .FoodItem:hover {
   box-shadow: 0 4px 8px 0 rgba(13, 168, 26, 0.2),
     0 6px 20px 0 rgba(13, 168, 26, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
 }
 
-.Add-remove {
-  padding: 5px !important;
+.AddRemove {
+  padding: 2px !important;
   border-radius: 30px !important;
 }
 
@@ -19,11 +19,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: medium;
 }
 
-.Food-price {
+.FoodPrice {
   background-color: whitesmoke;
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
+  font-size: smaller;
 }

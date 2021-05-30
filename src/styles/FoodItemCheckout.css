@@ -1,35 +1,21 @@
-.FoodItem-checkout {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.FoodItem-left {
-  width: 15vw;
-}
-
-@media screen and (max-width: 767px) {
-  .FoodItem-left {
-    width: 7rem;
-  }
-}
-
-/* .FoodItem-right {
-
-} */
-
-.FoodItem-checkout:hover {
-  box-shadow: 0 4px 8px 0 rgba(236, 36, 36, 0.198),
-    0 6px 20px 0 rgba(231, 37, 37, 0.19);
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-.Food-total {
+.CheckoutFoodTotal {
   margin-left: 10px;
   border-radius: 10px;
   border: 1px solid black;
-  padding: 10px;
+  padding: 5px;
   background-color: whitesmoke;
+  font-size: small;
+  float: right;
+}
+
+.CheckoutFoodItem {
+  width: clamp(10rem, 14rem, 18rem);
+  margin-top: 30px !important;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.CheckoutFoodItem:hover {
+  box-shadow: 0 4px 8px 0 rgba(13, 168, 26, 0.2),
+    0 6px 20px 0 rgba(13, 168, 26, 0.2);
 }
