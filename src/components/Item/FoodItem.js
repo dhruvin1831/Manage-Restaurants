@@ -6,11 +6,21 @@ import Button from "react-bootstrap/Button";
 import "../../styles/FoodItem.css";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { db } from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 
-function FoodItem({ id, key, image, name, price, viewOnly, isAvailable }) {
+function FoodItem({
+  id,
+  key,
+  image,
+  name,
+  price,
+  viewOnly,
+  isAvailable,
+  removeOption,
+}) {
   // eslint-disable-next-line no-unused-vars
-  const [{ order }, dispatch] = useStateValue();
+  const [{ order, user }, dispatch] = useStateValue();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -66,6 +76,20 @@ function FoodItem({ id, key, image, name, price, viewOnly, isAvailable }) {
     });
   };
 
+  const handleRemove = () => {
+    db.collection("restaurant-menus")
+      .doc(user?.uid)
+      .collection("food-items")
+      .doc(id)
+      .delete()
+      .then(() => {
+        alert("Item deleted successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Card className="FoodItem">
@@ -100,6 +124,13 @@ function FoodItem({ id, key, image, name, price, viewOnly, isAvailable }) {
             </div>
           ) : (
             <h6>Available: {isAvailable ? "Yes" : "No"}</h6>
+          )}
+          {removeOption ? (
+            <Button size="sm" variant="danger" onClick={handleRemove}>
+              Remove
+            </Button>
+          ) : (
+            ""
           )}
         </Card.Body>
       </Card>
