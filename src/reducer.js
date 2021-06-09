@@ -4,7 +4,6 @@ export const initialState = {
   user: null,
   page: "Select",
   restroPage: "menu",
-  filterCategory: "ALL",
   location: null,
 };
 
@@ -70,12 +69,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         restroPage: action.page,
-      };
-
-    case "SET_FILTER":
-      return {
-        ...state,
-        filterCategory: action.category,
       };
 
     case "SET_LOCATION":

@@ -8,7 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { useStateValue } from "../../StateProvider";
 
-function FoodItem({ id, key, image, name, price }) {
+function FoodItem({ id, key, image, name, price, viewOnly, isAvailable }) {
   // eslint-disable-next-line no-unused-vars
   const [{ order }, dispatch] = useStateValue();
   const [count, setCount] = useState(0);
@@ -78,23 +78,29 @@ function FoodItem({ id, key, image, name, price }) {
             </div>
           </Card.Title>
           <hr />
-          <Button
-            size="sm"
-            onClick={addItem}
-            variant="success"
-            className="AddRemove"
-          >
-            <AddIcon />
-          </Button>{" "}
-          {count}{" "}
-          <Button
-            size="sm"
-            onClick={removeItem}
-            variant="danger"
-            className="AddRemove"
-          >
-            <RemoveIcon />
-          </Button>
+          {!viewOnly ? (
+            <div>
+              <Button
+                size="sm"
+                onClick={addItem}
+                variant="success"
+                className="AddRemove"
+              >
+                <AddIcon />
+              </Button>{" "}
+              {count}{" "}
+              <Button
+                size="sm"
+                onClick={removeItem}
+                variant="danger"
+                className="AddRemove"
+              >
+                <RemoveIcon />
+              </Button>
+            </div>
+          ) : (
+            <h6>Available: {isAvailable ? "Yes" : "No"}</h6>
+          )}
         </Card.Body>
       </Card>
     </>

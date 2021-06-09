@@ -12,6 +12,7 @@ import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import firebase from "firebase/app";
 import { firebaseApp } from "../../firebase";
+import { auth } from "../../firebase";
 function CreateRestaurant() {
   const [{ user, location }, dispatch] = useStateValue();
   const [restro, setRestro] = useState("");
@@ -19,6 +20,11 @@ function CreateRestaurant() {
   const [modalShow, setModalShow] = useState(false);
   const [now, setNow] = useState(0);
   const [fileUrl, setFileUrl] = useState(null);
+
+  const signOut = () => {
+    auth.signOut();
+    history.push("/");
+  };
 
   const proceed = async (e) => {
     e.preventDefault();
@@ -103,7 +109,19 @@ function CreateRestaurant() {
           <span className="RestroCreateFormContainer">
             <h1>Provide Restaurant Details</h1>
             {user ? (
-              <h5 className="RestroCreateEmail">Email : {user?.email}</h5>
+              <div>
+                <h5 className="RestroCreateEmail">
+                  SignedIn as : {user?.email}
+                </h5>
+                <Button
+                  size="sm"
+                  onClick={signOut}
+                  className="DashboardHeaderButton"
+                  variant="danger"
+                >
+                  Sign-Out
+                </Button>
+              </div>
             ) : (
               ""
             )}

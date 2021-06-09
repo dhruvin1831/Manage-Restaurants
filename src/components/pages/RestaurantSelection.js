@@ -111,6 +111,17 @@ function RestaurantSelection() {
               <span className="RestaurantSelectionMessaage">
                 Explore Restaurants Around You
               </span>
+              <Button
+                size="sm"
+                variant="dark"
+                style={{
+                  float: "right",
+                }}
+                onClick={() => history.push("/")}
+              >
+                Back
+              </Button>
+
               <ShowLocation restaurants={restaurants} />
               <span
                 style={{ backgroundColor: "whitesmoke", color: "red" }}
@@ -127,7 +138,7 @@ function RestaurantSelection() {
               <br />
 
               <Container className="RestaurantsContainer">
-                {anyRestro === null ? "Loading..." : ""}
+                {anyRestro === null ? "loading..." : ""}
                 {anyRestro === false ? "No Restaurant Nearby" : ""}
                 {restaurants?.map((restaurant) => {
                   const dist = distance(
@@ -136,14 +147,8 @@ function RestaurantSelection() {
                     userLocation?.latitude,
                     userLocation?.longitude
                   );
-                  console.log(
-                    "dist",
-                    restaurant.data.name,
-                    userLocation.latitude,
-                    dist
-                  );
 
-                  if (dist < 50) {
+                  if (dist < 1000) {
                     return (
                       <div>
                         <Card
@@ -166,10 +171,7 @@ function RestaurantSelection() {
                               and make up the bulk of the card's content.
                             </Card.Text>
                             <Link to={`${match.url}/${restaurant.id}`}>
-                              <Button
-                                size="sm"
-                                variant="success"
-                              >
+                              <Button size="sm" variant="success">
                                 Go To Restaurant
                               </Button>
                             </Link>

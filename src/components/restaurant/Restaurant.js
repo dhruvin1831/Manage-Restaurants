@@ -21,12 +21,12 @@ function Restaurant() {
   const { resId } = useParams();
   const [foodItems, setFoodItems] = useState(null);
   const [restro, setRestro] = useState(null);
-  const [{ restroPage, filterCategory }, dispatch] = useStateValue();
+  const [filterCategory, setFilterCategory] = useState(null);
+  const [{ restroPage }, dispatch] = useStateValue();
 
   const setFoodItemsFilter = (food) => {
     if (filterCategory === "ALL") setFoodItems(food);
     else {
-      console.log(filterCategory);
       setFoodItems(
         food.filter((item) => item.data.foodCategory === filterCategory)
       );
@@ -34,6 +34,7 @@ function Restaurant() {
   };
 
   useEffect(() => {
+    setFilterCategory("ALL");
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     var unsubscribe = db.collection("restaurants").onSnapshot((snapShot) => {
       snapShot.docs.forEach((doc) => {
@@ -62,7 +63,6 @@ function Restaurant() {
         );
       });
 
-    console.log(foodItems);
     return () => {
       unsubscribe();
     };
@@ -81,10 +81,6 @@ function Restaurant() {
         type: "SET_RESTRO_PAGE",
         page: "menu",
       });
-      dispatch({
-        type: "SET_FILTER",
-        category: "ALL",
-      });
     };
     restroChange();
   }, [resId]);
@@ -98,7 +94,22 @@ function Restaurant() {
             <Info />
             <Container fluid className="RestaurantBody">
               <div className="FoodCategoryMenu">
-                <FoodCategory categories={restro?.data.foodCategories} />
+                <div className="FoodCategoryMenu">
+                  <DropdownButton
+                    id="dropdown-basic-button"
+                    variant="success"
+                    title="Select FoodCategory"
+                  >
+                    <Dropdown.Item onClick={() => setFilterCategory("ALL")}>
+                      All
+                    </Dropdown.Item>
+                    {restro?.data.foodCategories?.map((item) => (
+                      <Dropdown.Item onClick={() => setFilterCategory(item)}>
+                        {item}
+                      </Dropdown.Item>
+                    ))}
+                  </DropdownButton>
+                </div>
               </div>
               <Container className="FoodItemsContainer">
                 {foodItems?.length > 0 &&

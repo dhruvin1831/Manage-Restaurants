@@ -106,8 +106,8 @@ export default function MarkRestaurantLocation({ restaurants }) {
       >
         {userLocation !== null ? (
           <Marker
-            longitude={userLocation.longitude}
-            latitude={userLocation.latitude}
+            longitude={userLocation?.longitude}
+            latitude={userLocation?.latitude}
             offsetTop={-20}
             offsetLeft={-10}
           >

@@ -39,6 +39,10 @@ function Login() {
   //     .catch((error) => alert(error.message));
   // };
 
+  useEffect(() => {
+    if (user) findUser(user);
+  }, [user]);
+
   const findUser = (user) => {
     if (user === null) return;
     var docRef = db.collection("restaurants").doc(user.uid);
@@ -76,7 +80,6 @@ function Login() {
           type: "SET_USER",
           user: user,
         });
-        findUser(user);
       })
       .catch((error) => {
         // Handle Errors here.
