@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
@@ -18,6 +19,7 @@ function FoodItem({
   viewOnly,
   isAvailable,
   removeOption,
+  manageItem,
 }) {
   // eslint-disable-next-line no-unused-vars
   const [{ order, user }, dispatch] = useStateValue();
@@ -77,6 +79,9 @@ function FoodItem({
   };
 
   const handleRemove = () => {
+    // eslint-disable-next-line no-restricted-globals
+    var removeConfirm = confirm("Are you sure you want to Remove this Item?");
+    if (!removeConfirm) return;
     db.collection("restaurant-menus")
       .doc(user?.uid)
       .collection("food-items")
@@ -85,6 +90,44 @@ function FoodItem({
       .then(() => {
         alert("Item deleted successfully");
       })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const manageAvailibility = () => {
+    var toogleAvailibility = confirm(
+      "Are you sure you want to change Availibility?"
+    );
+    if (!toogleAvailibility) return;
+    db.collection("restaurant-menus")
+      .doc(user?.uid)
+      .collection("food-items")
+      .doc(id)
+      .update({
+        isAvailable: !isAvailable,
+      })
+      .then(() => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const managePrice = () => {
+    var newPrice = prompt("Enter New Price");
+    if (isNaN(parseInt(newPrice))) {
+      alert("Enter Valid Price");
+      return;
+    }
+
+    db.collection("restaurant-menus")
+      .doc(user?.uid)
+      .collection("food-items")
+      .doc(id)
+      .update({
+        price: newPrice,
+      })
+      .then(() => {})
       .catch((err) => {
         console.log(err);
       });
@@ -124,6 +167,19 @@ function FoodItem({
             </div>
           ) : (
             <h6>Available: {isAvailable ? "Yes" : "No"}</h6>
+          )}
+          {manageItem ? (
+            <div>
+              <Button onClick={manageAvailibility} variant="warning" size="sm">
+                Toggle Availibility
+              </Button>
+              <hr />
+              <Button onClick={managePrice} variant="info" size="sm">
+                Change Price
+              </Button>
+            </div>
+          ) : (
+            ""
           )}
           {removeOption ? (
             <Button size="sm" variant="danger" onClick={handleRemove}>

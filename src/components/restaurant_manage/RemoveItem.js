@@ -121,6 +121,7 @@ function RemoveItem() {
               viewOnly={true}
               isAvailable={item.data.isAvailable}
               removeOption={true}
+             
             />
           </div>
         ))}

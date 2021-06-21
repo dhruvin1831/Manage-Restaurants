@@ -148,7 +148,7 @@ function RestaurantSelection() {
                     userLocation?.longitude
                   );
 
-                  if (dist < 1000) {
+                  if (dist < 100) {
                     return (
                       <div>
                         <Card
