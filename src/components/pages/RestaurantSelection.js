@@ -36,12 +36,6 @@ function RestaurantSelection() {
           data: doc.data(),
         }))
       );
-
-      if (restaurants?.length === 0) {
-        setAnyRestro(false);
-      } else {
-        setAnyRestro(true);
-      }
     });
 
     return () => {
@@ -141,14 +135,16 @@ function RestaurantSelection() {
                 {anyRestro === null ? "loading..." : ""}
                 {anyRestro === false ? "No Restaurant Nearby" : ""}
                 {restaurants?.map((restaurant) => {
+                  setAnyRestro(false);
                   const dist = distance(
                     restaurant.data.location.latitude,
                     restaurant.data.location.longitude,
                     userLocation?.latitude,
                     userLocation?.longitude
                   );
-
-                  if (dist < 100) {
+      
+                  if (dist < 50) {
+                    setAnyRestro(true);
                     return (
                       <div>
                         <Card
