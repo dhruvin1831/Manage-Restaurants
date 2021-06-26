@@ -8,6 +8,9 @@ function LandingPage() {
   return (
     <div>
       <Container fluid className="LandingPageBody">
+        <div style={{ top: "0", marginBottom: "50px", fontSize: "50px" }}>
+          Manage Restaurants
+        </div>
         <div className="LandingPageSelectWrapper">
           <Link to="/restaurant_selection" style={{ textDecoration: "none" }}>
             <span className="LandingPageSelectContainer">

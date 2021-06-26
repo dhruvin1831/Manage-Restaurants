@@ -11,9 +11,14 @@ import { useStateValue } from "../../StateProvider";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { db } from "../../firebase";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import firebase from "firebase/app";
 
 function Checkout({ resId }) {
   // eslint-disable-next-line no-unused-vars
+  const [customer, setCustomer] = useState({ name: "", contact: "" });
+  const [show, setShow] = useState(false);
   const [{ order }, dispatch] = useStateValue();
   const [currentOrder, setCurrentOrder] = useState([]);
   const history = useHistory();
@@ -24,7 +29,6 @@ function Checkout({ resId }) {
     var unsubscribe = db.collection("restaurants").onSnapshot((snapShot) => {
       snapShot.docs.forEach((doc) => {
         if (doc.id === resId) {
-          console.log(doc.data());
           setRestro({ name: doc.data().name, id: doc.id, doc: doc.data() });
         }
       });
@@ -39,7 +43,6 @@ function Checkout({ resId }) {
     newOrder.sort((a, b) => {
       return a.id.localeCompare(b.id);
     });
-    console.log(newOrder);
     setCurrentOrder(newOrder);
   }, [order]);
 
@@ -56,6 +59,41 @@ function Checkout({ resId }) {
     });
   };
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handlePlaceOrder = () => {
+    if (customer.name === "" || customer.contact === "")
+      return alert("Enter Valid Customer Information");
+    if (isNaN(customer.contact) || customer.contact.length !== 10) {
+      return alert("Enter Valid Contact No.");
+    }
+    var newOrder = {
+      createdAt: Date.now(),
+      list: order,
+      amount: calculateTotalAmount(),
+      isProcessed: false,
+      customerData: customer,
+    };
+
+    db.collection("restaurants")
+      .doc(resId)
+      .collection("orders")
+      .add({
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        data: newOrder,
+      })
+      .then(() => {
+        handleClose();
+        setCustomer({ name: "", contact: "" });
+        clearOrder();
+        return alert("Order Placed Successfully");
+      })
+      .catch((err) => {
+        return alert(err);
+      });
+  };
+
   return (
     <>
       <Container className="CheckoutContainer">
@@ -64,11 +102,90 @@ function Checkout({ resId }) {
           <p>Manage your Order below or Place your order to confirm.</p>
           <p>
             <Button
-              onClick={() => history.push("/place-order")}
+              onClick={() => {
+                if (calculateTotalAmount() === 0)
+                  return alert("You have not ordered Anything !");
+                return handleShow();
+              }}
               variant="success"
             >
               Place Order
             </Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Place Order</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                Order type:{" "}
+                <input
+                  type="radio"
+                  id="restaurant"
+                  name="type"
+                  value="restaurant"
+                  checked
+                />
+                <label for="restaurant">Restaurant</label> |
+                <input
+                  type="radio"
+                  id="takeaway"
+                  name="type"
+                  value="takeaway"
+                  disabled
+                />
+                <label style={{ color: "gray" }} for="takeaway">
+                  {" "}
+                  Takeaway
+                </label>{" "}
+                |
+                <input
+                  disabled
+                  type="radio"
+                  id="reserve"
+                  name="type"
+                  value="reserve"
+                />
+                <label style={{ color: "gray" }} for="reserve">
+                  Reserve a Table
+                </label>
+                <br />
+                <h6>**Only Restaurant Orders available</h6>
+                <hr />
+                <Form>
+                  <Form.Group
+                    style={{ maxWidth: "330px" }}
+                    controlId="formBasicName"
+                  >
+                    <Form.Label>Customer Name :</Form.Label>
+
+                    <Form.Control
+                      required
+                      onChange={(e) =>
+                        setCustomer({ ...customer, name: e.target.value })
+                      }
+                      value={customer.name}
+                      type="text"
+                      placeholder="Customer Name"
+                    />
+                    <br />
+                    <Form.Label>Contact no. :</Form.Label>
+                    <Form.Control
+                      required
+                      onChange={(e) =>
+                        setCustomer({ ...customer, contact: e.target.value })
+                      }
+                      value={customer.contact}
+                      type="text"
+                      placeholder="Contact no."
+                    />
+                  </Form.Group>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button size="sm" variant="success" onClick={handlePlaceOrder}>
+                  Confirm
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </p>
         </Jumbotron>
         <br />

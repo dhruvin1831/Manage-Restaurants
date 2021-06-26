@@ -120,6 +120,7 @@ function Restaurant() {
                       image={item.data.image}
                       key={item.id}
                       id={item.id}
+                      available={item.data.isAvailable}
                     />
                   ))}
               </Container>
@@ -139,10 +140,10 @@ function Restaurant() {
             </Button>
           </div>
         ) : (
-          <Checkout />
+          <Checkout resId={resId} />
         )}
 
-        <Footer />
+        <Footer restaurant={restro}/>
       </div>
     </>
   );

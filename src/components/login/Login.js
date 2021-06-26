@@ -106,6 +106,20 @@ function Login() {
               <ExitToAppIcon />
               Sign In With Google
             </Button>
+            <br />
+            {/* <hr />
+            <span>
+              <h4>Test Account :</h4>
+            </span>
+            <span>
+              <h6>email/login-id: </h6>
+            </span>
+            <span>
+              <h6>Password : 12345_abc</h6>
+            </span>
+            <span>
+              <h6>Restaurant Name : Test Account restro</h6>
+            </span> */}
           </span>
         </div>
       </Container>

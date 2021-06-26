@@ -20,6 +20,7 @@ function FoodItem({
   isAvailable,
   removeOption,
   manageItem,
+  available,
 }) {
   // eslint-disable-next-line no-unused-vars
   const [{ order, user }, dispatch] = useStateValue();
@@ -145,7 +146,7 @@ function FoodItem({
             </div>
           </Card.Title>
           <hr />
-          {!viewOnly ? (
+          {!viewOnly && available ? (
             <div>
               <Button
                 size="sm"

@@ -60,6 +60,7 @@ function ViewAllItems() {
 
   return (
     <div>
+      Current Menu
       <div className="FoodCategoryMenu">
         <div className="FoodCategoryMenu">
           <DropdownButton

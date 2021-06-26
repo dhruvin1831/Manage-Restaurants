@@ -46,7 +46,7 @@ function Dashboard() {
         <DashboardHeader name={name} />
         <div style={{ marginTop: "56px" }}></div>
         {page === "Select" ? (
-          <Select />
+          <Menu />
         ) : page === "RestroAccount" ? (
           <RestroAccount email={email} />
         ) : page === "Orders" ? (

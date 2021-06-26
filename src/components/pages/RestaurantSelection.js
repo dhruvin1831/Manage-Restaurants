@@ -1,3 +1,4 @@
+/* eslint-disable no-const-assign */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
@@ -12,6 +13,8 @@ import { useHistory } from "react-router-dom";
 import ShowLocation from "../maps/ShowLocation";
 import { db } from "../../firebase";
 import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import Modal from "react-bootstrap/Modal";
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,6 +30,11 @@ function RestaurantSelection() {
   let match = useRouteMatch();
   const [restaurants, setRestaurants] = useState(null);
   const [anyRestro, setAnyRestro] = useState(null);
+  const [nearbyRestaurants, setNearbyRestaurants] = useState([]);
+  const [range, setRange] = useState(5000);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     var unsubscribe = db.collection("restaurants").onSnapshot((snapShot) => {
@@ -42,6 +50,29 @@ function RestaurantSelection() {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    var flag = false;
+    setNearbyRestaurants([]);
+    setAnyRestro(null);
+    restaurants?.map((restaurant) => {
+      const dist = distance(
+        restaurant.data.location.latitude,
+        restaurant.data.location.longitude,
+        userLocation?.latitude,
+        userLocation?.longitude
+      );
+      const newRestro = {
+        data: restaurant,
+        dist: dist,
+      };
+      if (dist <= range) flag = true;
+      setNearbyRestaurants([...nearbyRestaurants, newRestro]);
+    });
+    if (restaurants)
+      if (flag === false) setAnyRestro(false);
+      else setAnyRestro(true);
+  }, [restaurants]);
 
   function distance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295; // Math.PI / 180
@@ -93,6 +124,27 @@ function RestaurantSelection() {
     });
   }
 
+  useEffect(() => {
+    setAnyRestro(null);
+    var flag = false;
+    nearbyRestaurants?.map((restro) => {
+      if (restro.dist <= range) flag = true;
+    });
+
+    if (restaurants)
+      if (flag === false) setAnyRestro(false);
+      else setAnyRestro(true);
+  }, [range]);
+
+  function manageRange() {
+    var newRange = prompt("Enter New Range in kms");
+    if (isNaN(newRange)) {
+      alert("Enter Valid Range in kms");
+    } else {
+      setRange(newRange);
+    }
+  }
+
   return (
     <div className="RestaurantSelectionBody">
       <Switch>
@@ -129,22 +181,19 @@ function RestaurantSelection() {
               <h3 className="RestaurantSelectionMessaage" align="center">
                 Select from Nearby restaurants
               </h3>
+              <Button onClick={manageRange} variant="success" size="sm">
+                Set Range
+              </Button>
+              {range ? ` Current Range (kms): ${range}` : ""}
               <br />
-
               <Container className="RestaurantsContainer">
-                {anyRestro === null ? "loading..." : ""}
-                {anyRestro === false ? "No Restaurant Nearby" : ""}
-                {restaurants?.map((restaurant) => {
-                  setAnyRestro(false);
-                  const dist = distance(
-                    restaurant.data.location.latitude,
-                    restaurant.data.location.longitude,
-                    userLocation?.latitude,
-                    userLocation?.longitude
-                  );
-      
-                  if (dist < 50) {
-                    setAnyRestro(true);
+                {restaurants === null ? "loading..." : ""}
+                {anyRestro !== null && anyRestro === false
+                  ? "No Restaurant Nearby: Try Setting More Range"
+                  : ""}
+                {nearbyRestaurants?.map((restro) => {
+                  const restaurant = restro.data;
+                  if (restro.dist <= range) {
                     return (
                       <div>
                         <Card
@@ -163,14 +212,57 @@ function RestaurantSelection() {
                           <Card.Body>
                             <Card.Title>{restaurant.data.name}</Card.Title>
                             <Card.Text>
-                              Some quick example text to build on the card title
-                              and make up the bulk of the card's content.
+                              <div>
+                                <span></span>
+                                <span className="popularFoodCategory">
+                                  {restaurant.data.foodCategories[0]}
+                                </span>
+                                <span className="popularFoodCategory">
+                                  {restaurant.data.foodCategories[1]}
+                                </span>
+                                <span className="popularFoodCategory">
+                                  {restaurant.data.foodCategories[2]}
+                                </span>
+                              </div>
                             </Card.Text>
                             <Link to={`${match.url}/${restaurant.id}`}>
-                              <Button size="sm" variant="success">
+                              <Button size="sm" variant="info">
                                 Go To Restaurant
                               </Button>
                             </Link>
+                            <Button
+                              style={{ float: "right" }}
+                              onClick={handleShow}
+                              size="sm"
+                              variant="danger"
+                            >
+                              Find On Map
+                            </Button>
+                            <Modal
+                              show={show}
+                              onHide={handleClose}
+                              size="lg"
+                              dialogClassName="modal-90w"
+                              aria-labelledby="contained-modal-title-vcenter"
+                              centered
+                            >
+                              <Modal.Header>
+                                <Modal.Title id="contained-modal-title-vcenter">
+                                  Find On Map
+                                </Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>
+                                <ShowLocation
+                                  viewOnly={true}
+                                  restaurants={[restaurant]}
+                                />
+                              </Modal.Body>
+                              <Modal.Footer>
+                                <Button variant="warning" onClick={handleClose}>
+                                  Done
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
                           </Card.Body>
                         </Card>
                       </div>

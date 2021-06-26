@@ -35,13 +35,13 @@ const navStyle = {
   padding: "10px",
 };
 
-export default function MarkRestaurantLocation({ restaurants }) {
+export default function MarkRestaurantLocation({ restaurants, viewOnly }) {
   let match = useRouteMatch();
   const [selectedRestro, setSelectedRestro] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 40,
     longitude: -100,
-    zoom: 7,
+    zoom: 3,
     bearing: 0,
     pitch: 0,
   });
@@ -143,7 +143,7 @@ export default function MarkRestaurantLocation({ restaurants }) {
           <NavigationControl />
         </div>
 
-        {selectedRestro && (
+        {(!viewOnly && selectedRestro) && (
           <Popup
             style={{ padding: 0 }}
             longitude={selectedRestro.data.location.longitude}
@@ -164,6 +164,29 @@ export default function MarkRestaurantLocation({ restaurants }) {
               />
               <Card.Body>
                 <Card.Title>{selectedRestro.data.name}</Card.Title>
+
+                <Card.Text>
+                  <div>
+                    <span
+                      style={{ fontSize: "xx-small" }}
+                      className="popularFoodCategory"
+                    >
+                      {selectedRestro.data.foodCategories[0]}
+                    </span>
+                    <span
+                      style={{ fontSize: "xx-small" }}
+                      className="popularFoodCategory"
+                    >
+                      {selectedRestro.data.foodCategories[1]}
+                    </span>
+                    <span
+                      style={{ fontSize: "xx-small" }}
+                      className="popularFoodCategory"
+                    >
+                      {selectedRestro.data.foodCategories[2]}
+                    </span>
+                  </div>
+                </Card.Text>
                 <Link to={`${match.url}/${selectedRestro.id}`}>
                   <Button size="sm" variant="info">
                     Go to Restaurant

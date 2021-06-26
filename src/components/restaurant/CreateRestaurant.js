@@ -32,6 +32,7 @@ function CreateRestaurant() {
     if (fileUrl === null) return alert("please upload Profile Image");
     if (location === null) return alert("Please Mark Location");
     await db.collection("restaurants").doc(user?.uid).set({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       name: restro,
       location: location,
       email: user.email,
@@ -39,6 +40,7 @@ function CreateRestaurant() {
       createdAt: Date.now(),
       foodCategories: [],
       profileImage: fileUrl,
+      coverImages: [],
     });
     history.push("/dashboard");
   };

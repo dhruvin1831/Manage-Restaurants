@@ -3,12 +3,22 @@
   font-family: "Ubuntu", sans-serif;
   padding-top: 10px;
   padding-bottom: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 20px;
-  margin-top: 76px;
-  min-height: 80vh;
+  margin-top: 56px;
 }
 
 .OrderHeading {
   color: rgb(4, 50, 122);
+}
+
+.OrderItems {
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(33, 33, 33, 0.2);
+}
+
+.OrderItems:hover {
+  box-shadow: 0 0 40px rgba(33, 33, 33, 0.2);
 }

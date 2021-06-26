@@ -53,12 +53,12 @@ function Header({ name, id }) {
             >
               <Nav.Link href="/checkout">Your Order</Nav.Link>
             </Link>
-            <Link
+            {/* <Link
               style={{ textDecoration: "none" }}
               onClick={() => history.push("/place-order")}
             >
               <Nav.Link href="/checkout">Order History</Nav.Link>
-            </Link>
+            </Link> */}
           </Nav>
           <Nav>
             <Button

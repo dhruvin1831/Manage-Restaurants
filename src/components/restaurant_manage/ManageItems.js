@@ -75,6 +75,7 @@ function ManageItems() {
           foodItems in ADD ITEM
         </h3>
       </Jumbotron> */}
+      Manage Menu
       <div className="FoodCategoryMenu">
         <div className="FoodCategoryMenu">
           <DropdownButton

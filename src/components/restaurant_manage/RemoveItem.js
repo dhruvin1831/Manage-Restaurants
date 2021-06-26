@@ -76,7 +76,7 @@ function RemoveItem() {
           foodItems in ADD ITEM
         </h3>
       </Jumbotron> */}
-      **To change Availibility/Price Go to Manage Menu.
+      **To change Availibility/Price Go to Manage Section.
       <br />
       **This page is to Remove Item permanently.
       <div className="FoodCategoryMenu">
