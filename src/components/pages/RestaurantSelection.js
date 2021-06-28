@@ -55,6 +55,8 @@ function RestaurantSelection() {
     var flag = false;
     setNearbyRestaurants([]);
     setAnyRestro(null);
+
+    var newNearbyRestaurants = [];
     restaurants?.map((restaurant) => {
       const dist = distance(
         restaurant.data.location.latitude,
@@ -66,9 +68,12 @@ function RestaurantSelection() {
         data: restaurant,
         dist: dist,
       };
-      if (dist <= range) flag = true;
-      setNearbyRestaurants([...nearbyRestaurants, newRestro]);
+      if (dist <= range) {
+        flag = true;
+        newNearbyRestaurants.push(newRestro);
+      }
     });
+    setNearbyRestaurants(newNearbyRestaurants);
     if (restaurants)
       if (flag === false) setAnyRestro(false);
       else setAnyRestro(true);
@@ -138,7 +143,7 @@ function RestaurantSelection() {
 
   function manageRange() {
     var newRange = prompt("Enter New Range in kms");
-    if (isNaN(newRange)) {
+    if (newRange === null || newRange === "" || isNaN(newRange)) {
       alert("Enter Valid Range in kms");
     } else {
       setRange(newRange);

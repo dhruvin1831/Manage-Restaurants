@@ -143,7 +143,7 @@ export default function MarkRestaurantLocation({ restaurants, viewOnly }) {
           <NavigationControl />
         </div>
 
-        {(!viewOnly && selectedRestro) && (
+        {!viewOnly && selectedRestro && (
           <Popup
             style={{ padding: 0 }}
             longitude={selectedRestro.data.location.longitude}
@@ -167,7 +167,37 @@ export default function MarkRestaurantLocation({ restaurants, viewOnly }) {
 
                 <Card.Text>
                   <div>
-                    <span
+                    {selectedRestro.data.foodCategories.length > 0 ? (
+                      <span
+                        style={{ fontSize: "xx-small" }}
+                        className="popularFoodCategory"
+                      >
+                        {selectedRestro.data.foodCategories[0]}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    {selectedRestro.data.foodCategories.length > 1 ? (
+                      <span
+                        style={{ fontSize: "xx-small" }}
+                        className="popularFoodCategory"
+                      >
+                        {selectedRestro.data.foodCategories[1]}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    {selectedRestro.data.foodCategories.length > 2 ? (
+                      <span
+                        style={{ fontSize: "xx-small" }}
+                        className="popularFoodCategory"
+                      >
+                        {selectedRestro.data.foodCategories[2]}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                    {/* <span
                       style={{ fontSize: "xx-small" }}
                       className="popularFoodCategory"
                     >
@@ -184,7 +214,7 @@ export default function MarkRestaurantLocation({ restaurants, viewOnly }) {
                       className="popularFoodCategory"
                     >
                       {selectedRestro.data.foodCategories[2]}
-                    </span>
+                    </span> */}
                   </div>
                 </Card.Text>
                 <Link to={`${match.url}/${selectedRestro.id}`}>
