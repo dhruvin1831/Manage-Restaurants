@@ -91,7 +91,7 @@ function Restaurant() {
       <div className="RestaurantWrapper">
         {restroPage === "menu" ? (
           <div>
-            <Info />
+            <Info restaurant={restro}/>
             <Container fluid className="RestaurantBody">
               <div className="FoodCategoryMenu">
                 <div className="FoodCategoryMenu">

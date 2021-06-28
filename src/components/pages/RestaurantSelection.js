@@ -214,15 +214,27 @@ function RestaurantSelection() {
                             <Card.Text>
                               <div>
                                 <span></span>
-                                <span className="popularFoodCategory">
-                                  {restaurant.data.foodCategories[0]}
-                                </span>
-                                <span className="popularFoodCategory">
-                                  {restaurant.data.foodCategories[1]}
-                                </span>
-                                <span className="popularFoodCategory">
-                                  {restaurant.data.foodCategories[2]}
-                                </span>
+                                {restaurant.data.foodCategories.length > 0 ? (
+                                  <span className="popularFoodCategory">
+                                    {restaurant.data.foodCategories[0]}
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                                {restaurant.data.foodCategories.length > 1 ? (
+                                  <span className="popularFoodCategory">
+                                    {restaurant.data.foodCategories[1]}
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
+                                {restaurant.data.foodCategories.length > 2 ? (
+                                  <span className="popularFoodCategory">
+                                    {restaurant.data.foodCategories[2]}
+                                  </span>
+                                ) : (
+                                  ""
+                                )}
                               </div>
                             </Card.Text>
                             <Link to={`${match.url}/${restaurant.id}`}>

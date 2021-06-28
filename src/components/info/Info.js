@@ -3,18 +3,32 @@ import Carousel from "react-bootstrap/Carousel";
 import Image from "react-bootstrap/Image";
 import "../../styles/Info.css";
 
-function Info() {
+function Info({ restaurant }) {
   return (
     <>
-        <Carousel
-          interval={2000}
-          fade
-          nextIcon=""
-          nextLabel=""
-          prevLabel=""
-          prevIcon=""
-          className="Info-container"
-        >
+      <Carousel
+        interval={2000}
+        fade
+        nextIcon=""
+        nextLabel=""
+        prevLabel=""
+        prevIcon=""
+        className="Info-container"
+      >
+        {restaurant?.data.cover1 && restaurant.data?.cover1 !== null ? (
+          <Carousel.Item>
+            <Image
+              fluid
+              className="d-block w-100 Info-image"
+              src={restaurant.data.cover1}
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              {/* <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+        ) : (
           <Carousel.Item>
             <Image
               fluid
@@ -27,6 +41,21 @@ function Info() {
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
             </Carousel.Caption>
           </Carousel.Item>
+        )}
+        {restaurant?.data.cover2 && restaurant.data?.cover2 !== null ? (
+          <Carousel.Item>
+            <Image
+              fluid
+              className="d-block w-100 Info-image"
+              src={restaurant?.data.cover2}
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              {/* <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+        ) : (
           <Carousel.Item>
             <Image
               fluid
@@ -39,6 +68,21 @@ function Info() {
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
             </Carousel.Caption>
           </Carousel.Item>
+        )}
+        {restaurant?.data.cover3 && restaurant.data?.cover3 !== null ? (
+          <Carousel.Item>
+            <Image
+              fluid
+              className="d-block w-100 Info-image"
+              src={restaurant.data.cover3}
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              {/* <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+            </Carousel.Caption>
+          </Carousel.Item>
+        ) : (
           <Carousel.Item>
             <Image
               fluid
@@ -51,7 +95,8 @@ function Info() {
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
             </Carousel.Caption>
           </Carousel.Item>
-        </Carousel>
+        )}
+      </Carousel>
     </>
   );
 }

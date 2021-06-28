@@ -40,7 +40,9 @@ function CreateRestaurant() {
       createdAt: Date.now(),
       foodCategories: [],
       profileImage: fileUrl,
-      coverImages: [],
+      cover1: null,
+      cover2: null,
+      cover3: null
     });
     history.push("/dashboard");
   };
@@ -48,7 +50,7 @@ function CreateRestaurant() {
   const fileChange = (e) => {
     const file = e.target.files[0];
     if (file === null) return;
-    var t = file.type.split("/").pop().toLowerCase();
+    var t = file?.type.split("/").pop().toLowerCase();
     if (
       t !== "jpeg" &&
       t !== "jpg" &&
